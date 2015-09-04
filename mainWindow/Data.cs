@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,18 +7,41 @@ using System.Threading.Tasks;
 
 namespace mainWindow
 {
-    public class Data
+    public class Data : INotifyPropertyChanged
     {
         private MainWindow window;
         static Double MAXConst = 54354f;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(String propertyName) {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+
+        #region Constructors
+        public Data()
+        {
+            Mass = 999;
+        }
+
         public Data(MainWindow mainWindow)
         {
             window = mainWindow;
         }
-        /// <summary>
-        /// Масса
-        /// </summary>
-        public double Mass { get { return  Double.Parse(window.ltbMass.TextBox); } set { Mass = value; } }
+
+        #endregion
+
+
+
+
+        private double _Mass;
+        public double Mass { get { return _Mass; } set { _Mass = value; OnPropertyChanged("Mass"); } }
+
+
+
         public double C_y { get { return Double.Parse(window.ltbC_y.TextBox); } set { C_y = value; } }     //коэффициент подъемной силы
         public double P_s { get { return Double.Parse(window.ltbP_s.TextBox); } set { P_s = value; } }    //плотность воздуха
         public double B_a { get { return Double.Parse(window.ltbB_a.TextBox); } set { B_a = value; } }    //Средняя аэродинамическая хорда
@@ -33,6 +57,7 @@ namespace mainWindow
         public double KDash { get; set; }
         //stage 3
 
+        #region Mathematical Calculations
         public double G  {
             get
             {
@@ -72,5 +97,6 @@ namespace mainWindow
         {
             return Math.Sqrt(1f - 1.5f * YAlpha / Betha) / (1f - YAlpha / Betha);
         }
+        #endregion
     }
 }

@@ -4,15 +4,15 @@
 winexe
 C#
 .cs
-F:\Turbulence\mainWindow\obj\Debug\
+C:\Documents\Visual Studio 2015\Projects\Turbulence\mainWindow\obj\Debug\
 mainWindow
 none
 false
 DEBUG;TRACE
-F:\Turbulence\mainWindow\App.xaml
+C:\Documents\Visual Studio 2015\Projects\Turbulence\mainWindow\App.xaml
 3334453192
 
-121284508704
+13-1247664440
 15767094614
 ImageShow.xaml;LabelTextBox.xaml;MainWindow.xaml;
 

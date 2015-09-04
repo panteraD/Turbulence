@@ -1,0 +1,38 @@
+c:\documents\visual studio 2015\Projects\Turbulence\mainWindow\bin\Debug\mainWindow.exe.config
+c:\documents\visual studio 2015\Projects\Turbulence\mainWindow\bin\Debug\mainWindow.exe
+c:\documents\visual studio 2015\Projects\Turbulence\mainWindow\bin\Debug\mainWindow.pdb
+c:\documents\visual studio 2015\Projects\Turbulence\mainWindow\obj\Debug\MainWindow.g.cs
+c:\documents\visual studio 2015\Projects\Turbulence\mainWindow\obj\Debug\App.g.cs
+c:\documents\visual studio 2015\Projects\Turbulence\mainWindow\obj\Debug\mainWindow_MarkupCompile.cache
+c:\documents\visual studio 2015\Projects\Turbulence\mainWindow\obj\Debug\mainWindow_MarkupCompile.lref
+c:\documents\visual studio 2015\Projects\Turbulence\mainWindow\obj\Debug\MainWindow.baml
+c:\documents\visual studio 2015\Projects\Turbulence\mainWindow\obj\Debug\mainWindow.g.resources
+c:\documents\visual studio 2015\Projects\Turbulence\mainWindow\obj\Debug\mainWindow.Properties.Resources.resources
+c:\documents\visual studio 2015\Projects\Turbulence\mainWindow\obj\Debug\mainWindow.csproj.GenerateResource.Cache
+c:\documents\visual studio 2015\Projects\Turbulence\mainWindow\obj\Debug\mainWindow.exe
+c:\documents\visual studio 2015\Projects\Turbulence\mainWindow\obj\Debug\mainWindow.pdb
+c:\documents\visual studio 2015\Projects\Turbulence\mainWindow\obj\Debug\LabelTextBox.baml
+c:\documents\visual studio 2015\Projects\Turbulence\mainWindow\obj\Debug\LabelTextBox.g.cs
+c:\documents\visual studio 2015\Projects\Turbulence\mainWindow\obj\Debug\GeneratedInternalTypeHelper.g.cs
+c:\documents\visual studio 2015\Projects\Turbulence\mainWindow\obj\Debug\mainWindow.csprojResolveAssemblyReference.cache
+c:\documents\visual studio 2015\Projects\Turbulence\mainWindow\obj\Debug\ImageShow.g.cs
+c:\documents\visual studio 2015\Projects\Turbulence\mainWindow\obj\Debug\ImageShow.baml
+F:\Turbulence\mainWindow\bin\Debug\mainWindow.exe.config
+F:\Turbulence\mainWindow\obj\Debug\mainWindow.exe
+F:\Turbulence\mainWindow\obj\Debug\mainWindow.pdb
+F:\Turbulence\mainWindow\obj\Debug\mainWindow.csprojResolveAssemblyReference.cache
+F:\Turbulence\mainWindow\obj\Debug\ImageShow.g.cs
+F:\Turbulence\mainWindow\obj\Debug\LabelTextBox.g.cs
+F:\Turbulence\mainWindow\obj\Debug\MainWindow.g.cs
+F:\Turbulence\mainWindow\obj\Debug\App.g.cs
+F:\Turbulence\mainWindow\obj\Debug\GeneratedInternalTypeHelper.g.cs
+F:\Turbulence\mainWindow\obj\Debug\mainWindow_MarkupCompile.cache
+F:\Turbulence\mainWindow\obj\Debug\mainWindow_MarkupCompile.lref
+F:\Turbulence\mainWindow\bin\Debug\mainWindow.exe
+F:\Turbulence\mainWindow\bin\Debug\mainWindow.pdb
+F:\Turbulence\mainWindow\obj\Debug\ImageShow.baml
+F:\Turbulence\mainWindow\obj\Debug\LabelTextBox.baml
+F:\Turbulence\mainWindow\obj\Debug\MainWindow.baml
+F:\Turbulence\mainWindow\obj\Debug\mainWindow.g.resources
+F:\Turbulence\mainWindow\obj\Debug\mainWindow.Properties.Resources.resources
+F:\Turbulence\mainWindow\obj\Debug\mainWindow.csproj.GenerateResource.Cache

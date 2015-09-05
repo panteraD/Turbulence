@@ -25,39 +25,60 @@ namespace mainWindow
     public partial class MainWindow : Window
     {
         private Data _data;
-        ImageShow imageShow = new ImageShow();
-
+        private ImageShow _imageShow = null;
 
 
         public MainWindow()
         {
             InitializeComponent();
             _data = new Data(this);
+            _data.Height = 10000;
+            _data.Cy = 3.5;
+            _data.Ps = 1.167;
+            _data.MaxNumber = 0.6;
+            _data.Square = 200;
+            _data.Mass = 100000;
+            _data.Ba = 7;
+            _data.NMax = 1.5;
+            _data.Time = 100;
+            _data.L = 300;
             this.DataContext = _data;
-            
-          
+                 
         }
 
-
+        /// <summary>
+        /// Shows one instance of windows with Graph
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-           
-            imageShow.Show();
+            if (_imageShow == null)
+            {
+                _imageShow = new ImageShow();
+                _imageShow.Closed += (a, b) => _imageShow = null;
+                _imageShow.Show();
+            }
+            else
+            {
+
+                _imageShow.Show();
+            }
         }
 
         private void calcMu_Click(object sender, RoutedEventArgs e)
         {
-            ltbMu.TextBox = _data.countMu().ToString();
+            _data.CountMu();
         }
 
         private void calcXi_Click(object sender, RoutedEventArgs e)
         {
-            ltbXi.TextBox = _data.coundXi().ToString();
+            _data.CoundXi();
         }
 
         private void calcK_Click(object sender, RoutedEventArgs e)
         {
-            ltbK.TextBox = _data.countK().ToString();
+            _data.CountK();
         }
 
 

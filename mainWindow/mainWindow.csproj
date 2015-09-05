@@ -74,7 +74,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Data.cs" />
-    <Compile Include="DataViewModel.cs" />
     <Compile Include="ImageShow.xaml.cs">
       <DependentUpon>ImageShow.xaml</DependentUpon>
     </Compile>

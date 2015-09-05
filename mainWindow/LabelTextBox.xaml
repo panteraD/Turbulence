@@ -6,12 +6,12 @@
              xmlns:local="clr-namespace:mainWindow"
              xmlns:dc="clr-namespace:mainWindow"
              mc:Ignorable="d" Height="Auto" >
-    <Grid >
+    <Grid x:Name="Root" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" SharedSizeGroup="Labels"/>
-            <ColumnDefinition Width="Auto"/> <!-- auto -->
+            <ColumnDefinition Width="Auto"/> <!-- auto or * -->
         </Grid.ColumnDefinitions>
-        <Label Grid.Column="0" Content="Label"  HorizontalContentAlignment="Stretch"  HorizontalAlignment="Stretch"  Name="BaseLabel" VerticalAlignment="Stretch"  />
-        <TextBox Grid.Column="1" Width="Auto" Name="BaseTextBox"  PreviewTextInput="Double_PreviewTextInput" DataObject.Pasting="DoubleOnly_Pasting"  HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Left" Margin="0,0,-50,0" MaxWidth="100"  />
+        <Label Grid.Column="0" Content="{Binding Label}"  HorizontalContentAlignment="Stretch"  HorizontalAlignment="Stretch"  Name="BaseLabel" VerticalAlignment="Stretch"  />
+        <TextBox Grid.Column="1" Text="{Binding Text}" Width="Auto" Name="BaseTextBox"  PreviewTextInput="Double_PreviewTextInput" DataObject.Pasting="DoubleOnly_Pasting"  HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Left" Margin="0,0,-50,0" MaxWidth="100"  />
     </Grid>
 </UserControl>

@@ -10,22 +10,20 @@ namespace mainWindow
     public class Data : INotifyPropertyChanged
     {
         private MainWindow window;
-        static Double MAXConst = 54354f;
+        static Double MAXCONVERT = 340.3f;
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(String propertyName) {
+        private void OnPropertyChanged(String propertyName)
+        {
             PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) {
+            if (handler != null)
+            {
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
 
         #region Constructors
-        public Data()
-        {
-            Mass = 999;
-        }
 
         public Data(MainWindow mainWindow)
         {
@@ -34,68 +32,117 @@ namespace mainWindow
 
         #endregion
 
+        #region private_fileds
+        private double _mass;
+        private double _c_y;
+        private double _p_s;
+        private double _b_a;
+        private double _max_number;
+        private double _square;
+        private double _n_max;
+        private double _time;
+        private double _l;
+        private double _velocity;
+        private double _height;
+        private double _mu;
+        private double _xi;
+        private double _kdash;
+        private double _g;
+        private double _betha;
+        private double _yalpha;
+        private double _k;
+        #endregion
 
 
+        #region Properties
 
-        private double _Mass;
-        public double Mass { get { return _Mass; } set { _Mass = value; OnPropertyChanged("Mass"); } }
+        public double Mass { get { return _mass; } set { _mass = value; OnPropertyChanged("Mass"); } }
+        /// <summary>
+        /// коэффициент подъемной силы
+        /// </summary>
+        public double Cy { get { return _c_y; } set { _c_y = value; OnPropertyChanged("Cy"); } }
+        /// <summary>
+        /// Плотность воздуха
+        /// </summary>
+        public double Ps { get { return _p_s; } set { _p_s = value; OnPropertyChanged("Ps"); } }
+        /// <summary>
+        /// Средняя аэродимаческая хорда
+        /// </summary>  
+        public double Ba { get { return _b_a; } set { _b_a = value; OnPropertyChanged("Ba"); } }
+        public double MaxNumber
+        {
+            get { return _max_number; }
+            set
+            {
+                _max_number = value;
+                Velocity = value * MAXCONVERT; OnPropertyChanged("Max_Number");
+            }
+        }
+        public double Square { get { return _square; } set { _square = value; OnPropertyChanged("Square"); } }
+        public double NMax { get { return _n_max; } set { _n_max = value; OnPropertyChanged("NMax"); } }  //Макс приращение прегрузки
+        public double Time { get { return _time; } set { _time = value; OnPropertyChanged("Time"); } }
+        /// <summary>
+        /// Масштаб турбулентности
+        /// </summary>
+        public double L { get { return _l; } set { _l = value; OnPropertyChanged("L"); } }
+        public double Velocity { get { return _velocity; } set { _velocity = value; OnPropertyChanged("Velocity"); } }
+        public double Height { get { return _height; } set { _height = value; OnPropertyChanged("Height"); } }
 
+        //stage 2 (Calculated)
+        public double Mu { get { return _mu; } set { _mu = value; OnPropertyChanged("Mu"); } }
+        public double Xi { get { return _xi; } set { _xi = value; OnPropertyChanged("Xi"); } }
+        public double KDash { get { return _kdash; } set { _kdash = value; OnPropertyChanged("KDash"); } }
 
-
-        public double C_y { get { return Double.Parse(window.ltbC_y.TextBox); } set { C_y = value; } }     //коэффициент подъемной силы
-        public double P_s { get { return Double.Parse(window.ltbP_s.TextBox); } set { P_s = value; } }    //плотность воздуха
-        public double B_a { get { return Double.Parse(window.ltbB_a.TextBox); } set { B_a = value; } }    //Средняя аэродинамическая хорда
-        public double Max_number  { get { return  Double.Parse(window.ltbMass.TextBox); } set { Max_number = value; } }
-        public double Wing_Square { get { return Double.Parse(window.ltbS.TextBox); } set { Wing_Square = value; } }
-        public double N_Max { get { return Double.Parse(window.ltbMaxStress.TextBox); } set { N_Max = value; } }  //Макс приращение прегрузки
-        public double Time { get { return Double.Parse(window.ltbTime.TextBox); } set {Time = value; } }
-        public double L { get { return Double.Parse(window.ltbL.TextBox); } set { L = value; } }
-        public double Velocity { get { return Max_number * MAXConst; } }
-        //stage 2
-        public double Mu { get; set; }
-        public double Xi { get; set; }
-        public double KDash { get; set; }
         //stage 3
+        public double G { get { return _g; } set { _g = value; OnPropertyChanged("G"); } }
+        public double Betha { get { return _betha; } set { _betha = value; OnPropertyChanged("Betha"); } }
+        public double YAlpha { get { return _yalpha; } set { _yalpha = value; OnPropertyChanged("YAlpha"); } }
+        public double K { get { return _k; } set { _k = value; OnPropertyChanged("K"); } }
+      
+
+
+        #endregion
 
         #region Mathematical Calculations
-        public double G  {
-            get
-            {
-                return P_s * Velocity * Velocity;
-            }
-            set { G = value; }
-        }
 
-       
-        public double YAlpha
+        public void CountMu()
         {
-            get
-            {
-                return -C_y*G*Wing_Square/(Mass*Velocity);
-            }
+            Mu = 2f * Mass / (Cy * Ps * Square * Ba);
         }
 
-        public double Betha
+        public void CoundXi()
         {
-            get
-            {
-                return Velocity / L;
-            }
+            Xi = Ba / L;
         }
 
-
-        public double countMu()  {
-            return Mu = 2f * Mass / (C_y*P_s*Wing_Square*B_a);
-        }
-
-        public double coundXi()
+        
+        public void CalcG()
         {
-            return Xi = B_a / L;
+            G = Ps * Velocity * Velocity;
+        }
+ 
+
+        public void CalcYAlpha()
+        {
+
+            YAlpha = -Cy * G * Square / (Mass * Velocity);
+
         }
 
-        public double countK()
+        public void CalcBetha()
         {
-            return Math.Sqrt(1f - 1.5f * YAlpha / Betha) / (1f - YAlpha / Betha);
+
+
+            Betha = Velocity / L;
+
+        }
+
+        public void CountK()
+        {
+            CalcG();
+            CalcBetha();
+            CalcYAlpha();
+            K= Math.Sqrt(1f - 1.5f * YAlpha / Betha) / (1f - YAlpha / Betha);
         }
         #endregion
     }

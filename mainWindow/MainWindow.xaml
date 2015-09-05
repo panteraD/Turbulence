@@ -11,42 +11,44 @@
         <Menu HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="30" Background="LightBlue">
             <MenuItem Header=" K' " MenuItem.Click="MenuItem_Click"></MenuItem>
         </Menu>
-        <Grid Name="StageOne" HorizontalAlignment="Left" Height="394" VerticalAlignment="Top" Width="508" Margin="43,58,0,0">
+        <Grid Name="StageOne" HorizontalAlignment="Left" Height="313" VerticalAlignment="Top" Width="490" Margin="43,58,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <dc:LabelTextBox x:Name="ltbMass" Label="Масса"  TextBox=""   Grid.Column="0" HorizontalAlignment="Stretch" Margin="11,0,-97.2,0" VerticalAlignment="Top" Width="431"/>
-            <dc:LabelTextBox x:Name="ltbC_y" TextBox="3.5" Label="Коэффицент поъемной силы" Grid.Column="0" HorizontalAlignment="Stretch" Margin="10,26,-202,0" VerticalAlignment="Top" Width="Auto" />
-            <dc:LabelTextBox x:Name="ltbP_s" TextBox="1.167" Label="Плотность воздуха, кг/м^3" Grid.Column="0" HorizontalAlignment="Stretch" Margin="10,52,-175,-10" VerticalAlignment="Top" Width="Auto"/>
-            <dc:LabelTextBox x:Name="ltbS" TextBox="200" Label="Площадь крыла, м^2" Grid.Column="0" HorizontalAlignment="Stretch" Margin="10,104,-155,-64" VerticalAlignment="Top" Width="Auto"/>
-            <dc:LabelTextBox x:Name="ltbM" TextBox="0.6" Label="Число Маха" Grid.Column="0" HorizontalAlignment="Stretch" Margin="10,73,-155,-32" VerticalAlignment="Top" Width="Auto"/>
-            <dc:LabelTextBox x:Name="ltbB_a" TextBox="7" Label="Средняя аэродинамическая хорда, м" Grid.Column="0" HorizontalAlignment="Stretch" Margin="10,130,-155,-91" VerticalAlignment="Top" Width="Auto"/>
-            <dc:LabelTextBox x:Name="ltbMaxStress" TextBox="1.5" Label="Максимально приращанеие перегрузки" Grid.Column="0" HorizontalAlignment="Stretch" Margin="10,156,-97,-118" VerticalAlignment="Top" Width="Auto"/>
-            <dc:LabelTextBox x:Name="ltbTime" TextBox="100" Label="Время, за которое определяется уровень риска, час." Grid.Column="0" HorizontalAlignment="Stretch" Margin="10,182,-97,-145" VerticalAlignment="Top" Width="Auto"/>
-            <dc:LabelTextBox x:Name="ltbL" TextBox="300" Label="Масштаб турбулентности, м" Grid.Column="0" HorizontalAlignment="Stretch" Margin="10,208,-97,-156" VerticalAlignment="Top" Width="Auto"/>
-            <dc:LabelTextBox x:Name="ltbHeight" TextBox="10000" Label="Высота полета, м" HorizontalAlignment="Left" Margin="10,239,0,-135.2" VerticalAlignment="Top"/>
-            
+            <dc:LabelTextBox x:Name="LtbMass" Label="Масса, кг" Text="{Binding Mass}"  Grid.Column="0" HorizontalAlignment="Stretch" Margin="11,0,-97.2,0" VerticalAlignment="Top" Width="431"/>
+            <dc:LabelTextBox x:Name="LtbCy"  Label="Коэффицент поъемной силы" Text="{Binding Cy}" Grid.Column="0" HorizontalAlignment="Stretch" Margin="10,26,-202,0" VerticalAlignment="Top" Width="Auto" />
+            <dc:LabelTextBox x:Name="LtbPs"  Label="Плотность воздуха, кг/м^3" Text="{Binding Ps}" Grid.Column="0" HorizontalAlignment="Stretch" Margin="10,52,-175,-10" VerticalAlignment="Top" Width="Auto"/>
+            <dc:LabelTextBox x:Name="LtbSquare"  Label="Площадь крыла, м^2" Text="{Binding Square}" Grid.Column="0" HorizontalAlignment="Stretch" Margin="10,104,-155,-64" VerticalAlignment="Top" Width="Auto"/>
+            <dc:LabelTextBox x:Name="LtbM"  Label="Число Маха" Text="{Binding MaxNumber}" Grid.Column="0" HorizontalAlignment="Stretch" Margin="10,78,-155,0" VerticalAlignment="Top" Width="Auto"/>
+            <dc:LabelTextBox x:Name="LtbBa" Label="Средняя аэродинамическая хорда, м" Text="{Binding Ba}" Grid.Column="0" HorizontalAlignment="Stretch" Margin="10,130,-155,-91" VerticalAlignment="Top" Width="Auto"/>
+            <dc:LabelTextBox x:Name="LtbNMax"  Label="Максимальное приращанеие перегрузки" Text="{Binding NMax}" Grid.Column="0" HorizontalAlignment="Stretch" Margin="10,156,-97,-118" VerticalAlignment="Top" Width="Auto"/>
+            <dc:LabelTextBox x:Name="LtbTime"  Label="Время, за которое определяется уровень риска, час." Text="{Binding Time}" Grid.Column="0" HorizontalAlignment="Stretch" Margin="10,182,-97,-145" VerticalAlignment="Top" Width="Auto"/>
+            <dc:LabelTextBox x:Name="LtbL"  Label="Масштаб турбулентности, м"  Text="{Binding L}" Grid.Column="0" HorizontalAlignment="Stretch"  Margin="10,208,-97,-156" VerticalAlignment="Top" Width="Auto"/>
+            <dc:LabelTextBox x:Name="LtbHeight"  Label="Высота полета, м" Text="{Binding Height}" HorizontalAlignment="Left" Margin="10,239,0,-135.2" VerticalAlignment="Top"/>
+            <dc:LabelTextBox x:Name="LtbVelocity"  Label="Скорость полета, м/с" Text="{Binding Velocity}" HorizontalAlignment="Left" Margin="10,270,0,-165" VerticalAlignment="Top"/>
+
         </Grid>
-        <Grid Name="StageTwo" HorizontalAlignment="Left" Height="219" Margin="556,58,0,0" VerticalAlignment="Top" Width="232">
-            <Label x:Name="step2Label" Content="Расчет K'" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-            <dc:LabelTextBox x:Name="ltbKDash" TextBox="0.87" HorizontalAlignment="Left" Label="K'" Margin="10,150,0,0" VerticalAlignment="Top" Width="80"/>
-            <dc:LabelTextBox x:Name="ltbMu" Label="&#956;"  HorizontalAlignment="Left" Margin="9,41,0,0" VerticalAlignment="Top"/>
-            <dc:LabelTextBox x:Name="ltbXi" Label="&#967;"  HorizontalAlignment="Left" Margin="9,72,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="showKDashImage" Content="Показать график K'" HorizontalAlignment="Left" Margin="9,114,0,0" VerticalAlignment="Top" Width="136" Click="MenuItem_Click"/>
-            <Button x:Name="calcMu" Content="Рассчитать" HorizontalAlignment="Left" Margin="97,44,0,0" VerticalAlignment="Top" Width="112" Click="calcMu_Click" />
-            <Button x:Name="calcXi" Content="Рассчитать" HorizontalAlignment="Left" Margin="97,75,0,0" VerticalAlignment="Top" Width="112" Click="calcXi_Click"/>
+        <Grid Name="StageTwo" HorizontalAlignment="Left" Height="278" Margin="533,58,0,0" VerticalAlignment="Top" Width="271">
+            <Label x:Name="Step2Label" Content="Расчет K'" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+            <dc:LabelTextBox x:Name="LtbKDash" Text="{Binding KDash}" HorizontalAlignment="Left" Label="K'" Margin="10,150,0,0" VerticalAlignment="Top" Width="80"/>
+            <dc:LabelTextBox x:Name="LtbMu" Label="&#956;" Text="{Binding Mu}"  HorizontalAlignment="Left" Margin="9,41,0,0" VerticalAlignment="Top"/>
+            <dc:LabelTextBox x:Name="LtbXi" Label="&#967;" Text="{Binding Xi}"  HorizontalAlignment="Left" Margin="9,72,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="ShowKDashImage" Content="Показать график K'" HorizontalAlignment="Left" Margin="9,114,0,0" VerticalAlignment="Top" Width="136" Click="MenuItem_Click"/>
+            <Button x:Name="CalcMu" Content="Рассчитать" HorizontalAlignment="Left" Margin="156,44,0,0" VerticalAlignment="Top" Width="112" Click="calcMu_Click" />
+            <Button x:Name="CalcXi" Content="Рассчитать" HorizontalAlignment="Left" Margin="156,72,0,0" VerticalAlignment="Top" Width="112" Click="calcXi_Click"/>
         </Grid>
-        <Grid Name="StageThree" HorizontalAlignment="Left" Height="258" Margin="788,68,0,0" VerticalAlignment="Top" Width="338">
-            <Label x:Name="step3Label" Content="Расчет K" Margin="0,0,258,229"></Label>
-            <dc:LabelTextBox x:Name="ltbY_alpha" Label="Y alpha" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top"/>
-            <dc:LabelTextBox x:Name="ltbBetha" Label="Betha"  HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top"/>
-            <dc:LabelTextBox x:Name="ltbK" Label="K" HorizontalAlignment="Left" Margin="10,142,0,0" VerticalAlignment="Top" />
-            <dc:LabelTextBox x:Name="ltbG" Label="g" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.458,-0.219"/>
-            <Button x:Name="calcK" Content="Рассчитать K" Margin="10,173,196,66" Click="calcK_Click" ></Button>
+        <Grid Name="StageThree" HorizontalAlignment="Left" Height="268" Margin="809,68,0,0" VerticalAlignment="Top" Width="338">
+            <Label x:Name="Step3Label" Content="Расчет K" Margin="0,0,258,229"></Label>
+            <dc:LabelTextBox x:Name="LtbYAlpha" Label="Y alpha" Text="{Binding YAlpha}" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top"/>
+            <dc:LabelTextBox x:Name="LtbBetha" Label="Betha"  Text="{Binding Betha}" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top"/>
+            <dc:LabelTextBox x:Name="LtbK" Label="K" Text="{Binding K}" HorizontalAlignment="Left" Margin="10,142,0,0" VerticalAlignment="Top" />
+            <dc:LabelTextBox x:Name="LtbG" Label="g" Text="{Binding G}" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.458,-0.219"/>
+            <Button x:Name="CalcK" Content="Рассчитать K" Margin="10,173,196,66" Click="calcK_Click" ></Button>
         </Grid>
+       
 
     </Grid>
 

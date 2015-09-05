@@ -24,41 +24,36 @@ namespace mainWindow
         public LabelTextBox()
         {
             InitializeComponent();
+            Root.DataContext = this;
         }
 
         public static readonly DependencyProperty LabelTextBoxProperty = DependencyProperty.Register("LTBProp", typeof(string), typeof(LabelTextBox), new UIPropertyMetadata(null));
 
-        public string TestProp
-        {
-            get { return (string)GetValue(LabelTextBoxProperty); }
-            set { SetValue(LabelTextBoxProperty, value); }
-        }
+        public static readonly DependencyProperty LabelProperty = DependencyProperty.Register("Label",
+                typeof(string),
+                typeof(LabelTextBox),
+                new FrameworkPropertyMetadata("Unnamed Label"));
+
+        public static readonly DependencyProperty TextProperty = DependencyProperty
+        .Register("Text",
+                typeof(string),
+                typeof(LabelTextBox),
+                new FrameworkPropertyMetadata("", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
        
 
-
-        string LocalLabel = "";
-        string LocalTextBox = "";
-
         public string Label
         {
-            get { return LocalLabel; }
-            set
-            {
-                LocalLabel = value;
-                BaseLabel.Content = value;
-            }
+            get { return (string)GetValue(LabelProperty); }
+            set { SetValue(LabelProperty, value); }
         }
 
-        public string TextBox
+        public string Text
         {
-            get { return LocalTextBox; }
-            set
-            {
-                LocalTextBox = value;
-                BaseTextBox.Text = value;
-            }
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
         }
+
 
         private void Double_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {

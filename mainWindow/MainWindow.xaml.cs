@@ -42,7 +42,15 @@ namespace mainWindow
             _data.NMax = 1.5;
             _data.Time = 100;
             _data.L = 300;
+
+            _data.KDash = 0.87;
+            _data.BOne = 1.04;
+            _data.BTwo = 3.38;
+            _data.TimeOne = 0.085;
+            _data.TimeTwo = 0.0005;
             this.DataContext = _data;
+
+           
                  
         }
 
@@ -68,19 +76,39 @@ namespace mainWindow
 
         private void calcMu_Click(object sender, RoutedEventArgs e)
         {
-            _data.CountMu();
+            _data.CalcMu();
         }
 
         private void calcXi_Click(object sender, RoutedEventArgs e)
         {
-            _data.CoundXi();
+            _data.CalcXi();
         }
 
         private void calcK_Click(object sender, RoutedEventArgs e)
         {
-            _data.CountK();
+            _data.CalcK();
         }
 
 
+        private void CalcB_OnClick(object sender, RoutedEventArgs e)
+        {
+             _data.CalcB();
+        }
+
+        private void CalcLambdaZero_Click(object sender, RoutedEventArgs e)
+        {
+            _data.CalcLambdaZero();
+        }
+
+        private void CalcLambdas_OnClick(object sender, RoutedEventArgs e)
+        {
+            _data.CalcLambdas();   
+        }
+
+
+        private void CalcP_OnClick(object sender, RoutedEventArgs e)
+        {
+            _data.CalcP();
+        }
     }
 }

@@ -10,7 +10,9 @@ namespace mainWindow
     public class Data : INotifyPropertyChanged
     {
         private MainWindow window;
-        static Double MAXCONVERT = 340.3f;
+        private static Double MAXCONVERT = 340.3f;
+        private static Double GFORCE = 9.81;
+        private static Double NU = 0.4; //only for M < 1
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(String propertyName)
@@ -51,6 +53,16 @@ namespace mainWindow
         private double _betha;
         private double _yalpha;
         private double _k;
+        private double _b;
+        private double _lambdaZero;
+        private double _bOne;
+        private double _bTwo;
+        private double _lambdaOne;
+        private double _lambdaTwo;
+        private double _time1;
+        private double _time2;
+        private double _p;
+        private double _q;
         #endregion
 
 
@@ -98,19 +110,39 @@ namespace mainWindow
         public double Betha { get { return _betha; } set { _betha = value; OnPropertyChanged("Betha"); } }
         public double YAlpha { get { return _yalpha; } set { _yalpha = value; OnPropertyChanged("YAlpha"); } }
         public double K { get { return _k; } set { _k = value; OnPropertyChanged("K"); } }
-      
+
+        //Stage 4
+        public double B { get { return _b; } set { _b = value; OnPropertyChanged("B"); } }
+
+        //Stage 5
+        public double LambdaZero { get { return _lambdaZero; } set { _lambdaZero = value; OnPropertyChanged("LambdaZero"); } }
+        public double BOne { get { return _bOne; } set { _bOne = value; OnPropertyChanged("BOne"); } }
+        public double BTwo { get { return _bTwo; } set { _bTwo = value; OnPropertyChanged("BTwo"); } }
+        public double LambdaOne { get { return _lambdaOne; } set { _lambdaOne = value; OnPropertyChanged("LambdaOne"); } }
+        public double LambdaTwo { get { return _lambdaTwo; } set { _lambdaTwo = value; OnPropertyChanged("LambdaTwo"); } }
+        public double TimeOne  { get { return _time1; } set { _time1 = value; OnPropertyChanged("TimeOne"); } }
+        public double TimeTwo { get { return _time2; } set { _time2 = value; OnPropertyChanged("TimeTwo"); } }
+        public double P { get { return _p; } set { _p = value; OnPropertyChanged("P"); } }
+        public double Q { get { return _q; } set { _q = value; OnPropertyChanged("Q"); } }
+    
+
+
+
+
+
+
 
 
         #endregion
 
         #region Mathematical Calculations
 
-        public void CountMu()
+        public void CalcMu()
         {
             Mu = 2f * Mass / (Cy * Ps * Square * Ba);
         }
 
-        public void CoundXi()
+        public void CalcXi()
         {
             Xi = Ba / L;
         }
@@ -118,31 +150,49 @@ namespace mainWindow
         
         public void CalcG()
         {
-            G = Ps * Velocity * Velocity;
+            G = Ps * Velocity * Velocity/2f;
         }
  
 
         public void CalcYAlpha()
         {
-
             YAlpha = -Cy * G * Square / (Mass * Velocity);
-
         }
 
         public void CalcBetha()
         {
-
-
             Betha = Velocity / L;
-
         }
 
-        public void CountK()
+        public void CalcK()
         {
             CalcG();
             CalcBetha();
             CalcYAlpha();
             K= Math.Sqrt(1f - 1.5f * YAlpha / Betha) / (1f - YAlpha / Betha);
+        }
+
+        public void CalcB()
+        {
+            B = K*KDash*Cy*Ps*Velocity*Square/(2f*Mass*GFORCE);
+        }
+
+        public void CalcLambdaZero()
+        {
+            LambdaZero = Velocity*NU*1000f/(Math.Sqrt(Ba*L)*K*KDash);
+            
+        }
+
+        public void CalcLambdas()
+        {
+            LambdaOne = LambdaZero*Math.Exp(-NMax/(B*BOne));
+            LambdaTwo = LambdaZero*Math.Exp(-NMax/(B*BTwo));
+        }
+
+        public void CalcP()
+        {
+            P = Math.Exp(-(TimeOne*LambdaOne + TimeTwo*LambdaTwo)*Time);
+            Q = 1f - P;
         }
         #endregion
     }

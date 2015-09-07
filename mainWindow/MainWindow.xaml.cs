@@ -74,14 +74,12 @@ namespace mainWindow
             }
         }
 
-        private void calcMu_Click(object sender, RoutedEventArgs e)
-        {
-            _data.CalcMu();
-        }
+       
 
-        private void calcXi_Click(object sender, RoutedEventArgs e)
+        private void calcXiMu_Click(object sender, RoutedEventArgs e)
         {
             _data.CalcXi();
+            _data.CalcMu();
         }
 
         private void calcK_Click(object sender, RoutedEventArgs e)
@@ -110,5 +108,7 @@ namespace mainWindow
         {
             _data.CalcP();
         }
+
+        
     }
 }

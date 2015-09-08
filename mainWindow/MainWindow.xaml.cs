@@ -24,89 +24,52 @@ namespace mainWindow
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Data _data;
-        private ImageShow _imageShow = null;
-
+        private MainWindowModel _mainWindowModel;
 
         public MainWindow()
         {
             InitializeComponent();
-            _data = new Data(this);
-            _data.Height = 10000;
-            _data.Cy = 3.5;
-            _data.Ps = 1.167;
-            _data.MaxNumber = 0.6;
-            _data.Square = 200;
-            _data.Mass = 100000;
-            _data.Ba = 7;
-            _data.NMax = 1.5;
-            _data.Time = 100;
-            _data.L = 300;
 
-            _data.KDash = 0.87;
-            _data.BOne = 1.04;
-            _data.BTwo = 3.38;
-            _data.TimeOne = 0.085;
-            _data.TimeTwo = 0.0005;
-            this.DataContext = _data;
+            
+            MainWindowViewModel mwvm= new MainWindowViewModel();
+            //DataContext = mwvm;
+            _mainWindowModel = mwvm.Data;
 
-           
-                 
+
         }
 
-        /// <summary>
-        /// Shows one instance of windows with Graph
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            if (_imageShow == null)
-            {
-                _imageShow = new ImageShow();
-                _imageShow.Closed += (a, b) => _imageShow = null;
-                _imageShow.Show();
-            }
-            else
-            {
-
-                _imageShow.Show();
-            }
-        }
-
-       
-
+        
         private void calcXiMu_Click(object sender, RoutedEventArgs e)
         {
-            _data.CalcXi();
-            _data.CalcMu();
+            _mainWindowModel.CalcXi();
+            _mainWindowModel.CalcMu();
         }
 
         private void calcK_Click(object sender, RoutedEventArgs e)
         {
-            _data.CalcK();
+            _mainWindowModel.CalcK();
         }
 
 
         private void CalcB_OnClick(object sender, RoutedEventArgs e)
         {
-             _data.CalcB();
+             _mainWindowModel.CalcB();
         }
 
         private void CalcLambdaZero_Click(object sender, RoutedEventArgs e)
         {
-            _data.CalcLambdaZero();
+            _mainWindowModel.CalcLambdaZero();
         }
 
         private void CalcLambdas_OnClick(object sender, RoutedEventArgs e)
         {
-            _data.CalcLambdas();   
+            _mainWindowModel.CalcLambdas();   
         }
 
 
         private void CalcP_OnClick(object sender, RoutedEventArgs e)
         {
-            _data.CalcP();
+            _mainWindowModel.CalcP();
         }
 
         

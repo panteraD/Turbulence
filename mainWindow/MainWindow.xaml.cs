@@ -24,54 +24,21 @@ namespace mainWindow
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MainWindowModel _mainWindowModel;
-
+        private ViewModel viewModel;
         public MainWindow()
         {
+            viewModel = new ViewModel();
+            DataContext = viewModel;
+            CompositionTarget.Rendering += CompositionTargetRendering;
             InitializeComponent();
 
-            
-            MainWindowViewModel mwvm= new MainWindowViewModel();
-            //DataContext = mwvm;
-            _mainWindowModel = mwvm.Data;
-
-
-        }
-
         
-        private void calcXiMu_Click(object sender, RoutedEventArgs e)
-        {
-            _mainWindowModel.CalcXi();
-            _mainWindowModel.CalcMu();
-        }
-
-        private void calcK_Click(object sender, RoutedEventArgs e)
-        {
-            _mainWindowModel.CalcK();
         }
 
 
-        private void CalcB_OnClick(object sender, RoutedEventArgs e)
+        private void CompositionTargetRendering(object sender, EventArgs e)
         {
-             _mainWindowModel.CalcB();
+            Plot1.InvalidatePlot(true);
         }
-
-        private void CalcLambdaZero_Click(object sender, RoutedEventArgs e)
-        {
-            _mainWindowModel.CalcLambdaZero();
-        }
-
-        private void CalcLambdas_OnClick(object sender, RoutedEventArgs e)
-        {
-            _mainWindowModel.CalcLambdas();   
-        }
-
-
-        private void CalcP_OnClick(object sender, RoutedEventArgs e)
-        {
-            _mainWindowModel.CalcP();
-        }
-
-        
     }
 }

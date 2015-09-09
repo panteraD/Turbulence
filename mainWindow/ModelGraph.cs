@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OxyPlot.Axes;
 using OxyPlot.Series;
 
 namespace mainWindow
@@ -11,7 +12,7 @@ namespace mainWindow
 
     using OxyPlot;
 
-    public class MainWindowGraph
+    public class ModelGraph
     {
         /*
         public MainViewModel()
@@ -23,10 +24,32 @@ namespace mainWindow
         public PlotModel MyModel { get; private set; }
         */
 
-        public MainWindowGraph()
+        public ModelGraph()
         {
             this.Title = "P from M";
-            this.Model = new PlotModel();
+            this.Model = new PlotModel
+            {
+                Title = " p m",
+                TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinPlotArea,
+                LegendTitle = "I am a Legend",
+                LegendOrientation = LegendOrientation.Horizontal,
+                LegendPlacement = LegendPlacement.Inside,
+                LegendPosition = LegendPosition.TopRight
+
+            };
+
+            LinearAxis xAxis = new LinearAxis();
+            xAxis.Position = AxisPosition.Bottom;
+            xAxis.Title = "Mass, kg";
+
+            LinearAxis yAxis =new LinearAxis();
+            yAxis.Position = AxisPosition.Left;
+            xAxis.Title = "Вероятность";
+
+            Model.Axes.Add(xAxis);
+            Model.Axes.Add(yAxis);
+
+
             LineSeries lineSeries = new LineSeries();
             lineSeries.ItemsSource = Points;
             this.Model.Series.Add(lineSeries);
@@ -45,6 +68,12 @@ namespace mainWindow
         public string Title { get; set; }
 
         public PlotModel Model { get; set; }
+
+        public void Update(List<DataPoint> points )
+        {
+            this.Points = points;
+            this.Model.InvalidatePlot(true);
+        }
 
 
         

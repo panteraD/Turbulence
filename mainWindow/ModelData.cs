@@ -8,7 +8,7 @@ using OxyPlot;
 
 namespace mainWindow
 {
-    public class MainWindowModel : INotifyPropertyChanged
+    public class ModelData : INotifyPropertyChanged
     {
         private MainWindow window;
         private static Double MAXCONVERT = 340.3f;
@@ -28,7 +28,7 @@ namespace mainWindow
 
         #region Constructors
 
-        public MainWindowModel()
+        public ModelData()
         {
            
         }
@@ -190,7 +190,7 @@ namespace mainWindow
             LambdaTwo = LambdaZero*Math.Exp(-NMax/(B*BTwo));
         }
 
-        public void CalcP()
+        public void CalcPQ()
         {
             P = Math.Exp(-(TimeOne*LambdaOne + TimeTwo*LambdaTwo)*Time);
             Q = 1f - P;
@@ -199,13 +199,15 @@ namespace mainWindow
         public void CalcALL()
         {
             CalcMu(); CalcXi(); CalcG(); CalcYAlpha(); CalcBetha(); CalcK();
-            CalcB(); CalcLambdaZero(); CalcLambdas(); CalcP();
+            CalcB(); CalcLambdaZero(); CalcLambdas(); CalcPQ();
         }
         #endregion
 
-        public IList<DataPoint> GetDepenedncyPointsPv(String propX, String propY)
+
+        public List<DataPoint> GetDepenedncyPointsPv(String propX, String propY)
         {
-            IList<DataPoint> list = new List<DataPoint>();
+            List<DataPoint> list = new List<DataPoint>();
+            ModelData copy;
             
             double oldValue = (double)this.GetType().GetProperty(propX).GetValue(this, null);
             double inc = oldValue/100;
@@ -219,5 +221,7 @@ namespace mainWindow
             this.GetType().GetProperty(propX).SetValue(this, oldValue);
             return list;
         }
+
+        
     }
 }

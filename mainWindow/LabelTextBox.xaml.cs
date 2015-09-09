@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -40,7 +41,19 @@ namespace mainWindow
                 typeof(LabelTextBox),
                 new FrameworkPropertyMetadata("", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
-       
+        public static readonly DependencyProperty ReadOnlyProperty = DependencyProperty
+            .Register("ReadOnly",
+                typeof (bool),
+                typeof (LabelTextBox),
+                new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public static readonly DependencyProperty BackGroundProperty = DependencyProperty
+            .Register("TextBoxBackGround",
+                typeof(Brush),
+                typeof(LabelTextBox),
+                new FrameworkPropertyMetadata(Brushes.White, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+
 
         public string Label
         {
@@ -52,6 +65,18 @@ namespace mainWindow
         {
             get { return (string)GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
+        }
+
+        public bool ReadOnly
+        {
+            get { return (bool)GetValue(ReadOnlyProperty); }
+            set { SetValue(ReadOnlyProperty, value); }
+        }
+
+        public Brush TextBoxBackGround
+        {
+            get { return (Brush)GetValue(BackGroundProperty); }
+            set { SetValue(BackGroundProperty, value); }
         }
 
 

@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -27,8 +29,8 @@ namespace mainWindow
         }
 
         private ModelData _data;
-        private ModelGraph _graph;
         private PlotModel _plotModel;
+        private List<ModelData> _dataPoitsList = new List<ModelData>(); 
 
 
 
@@ -38,11 +40,7 @@ namespace mainWindow
             set { _data = value; OnPropertyChanged("Data"); }
         }
 
-        public ModelGraph Graph
-        {
-            get { return _graph; }
-            set { _graph = value; OnPropertyChanged("Graph"); }
-        }
+      
 
         public PlotModel PlotModel
         {
@@ -53,50 +51,81 @@ namespace mainWindow
         public ViewModel()
         {
             _data = new ModelData();
-            _data.Height = 10000;
-            _data.Cy = 3.5;
-            _data.Ps = 1.167;
-            _data.MaxNumber = 0.6;
-            _data.Square = 200;
-            _data.Mass = 100000;
-            _data.Ba = 7;
-            _data.NMax = 1.5;
-            _data.Time = 100;
-            _data.L = 300;
-
-            _data.KDash = 0.87;
-            _data.BOne = 1.04;
-            _data.BTwo = 3.38;
-            _data.TimeOne = 0.085;
-            _data.TimeTwo = 0.0005;
+            InitData(_data);
             _plotModel = new PlotModel();
+           
+        }
 
+        private void InitData(ModelData data)
+        {
+            data.Height = 10000;
+            data.Cy = 3.5;
+            data.Ps = 1.167;
+            data.MaxNumber = 0.6;
+            data.Square = 200;
+            data.Mass = 100000;
+            data.Ba = 7;
+            data.NMax = 1.5;
+            data.Time = 100;
+            data.L = 300;
 
+            data.KDash = 0.87;
+            data.BOne = 1.04;
+            data.BTwo = 3.38;
+            data.TimeOne = 0.085;
+            data.TimeTwo = 0.0005;
+        }
 
+        private void AddDataPoint()
+        {
+            _dataPoitsList.Add(_data.Clone());
+            MessageBox.Show(_dataPoitsList.Count.ToString());
 
         }
 
-        /// <summary>
-        /// Ints plot by clock
-        /// </summary>
-        private void InitPlot()
+        public List<DataPoint> GetPoints(String propX, String propY)
+        {
+            List<DataPoint> list =new List<DataPoint>();
+            foreach(ModelData data in _dataPoitsList)
+            {
+                list.Add(new DataPoint((double)data.GetType().GetProperty(propX).GetValue(data, null), (double)data.GetType().GetProperty(propY).GetValue(data, null)));   
+            }
+            
+            return list;
+        }
+
+
+
+        private void ShowPMass()
         {
 
-            UpdatePlot("Mass","P","P","масса, кг","зависимость P от массы");
+            UpdatePlot("Mass","P","P","масса, кг","зависимость P от массы",false);
         }
 
-        public void Doshit()
+        public void ShowQMass()
         {
 
-            UpdatePlot("Mass", "Q", "Q", "масса, кг", "зависимость Q от массы");
+            UpdatePlot("Mass", "Q", "Q", "масса, кг", "зависимость Q от массы",false);
 
         }
 
-        private void UpdatePlot(String xProp, String yProp, String xAxis, String yAxis, String legend)
+        public void ShowPV()
+        {
+            UpdatePlot("Velocity", "P","P","скорость, м/с", "зависимость P от скорости",true);
+        }
+
+        public void ShowQV()
+        {
+            UpdatePlot("Velocity", "Q", "Q", "скорость, м/с", "зависимость Q от скорости", true);
+        }
+
+        #region Plottting methods
+
+        private void UpdatePlot(String xProp, String yProp, String xAxis, String yAxis, String legend, bool dataIndepended)
         {
 
             SetUpModel(xAxis, yAxis);
-            LoadData(xProp, yProp, legend);
+            LoadData(xProp, yProp, legend, dataIndepended);
         }
 
         private void SetUpModel(String xAxis, String yAxis)
@@ -116,7 +145,7 @@ namespace mainWindow
 
         }
 
-        public void LoadData(String param1, String param2, String legend)
+        public void LoadData(String param1, String param2, String legend, bool dataIndependent)
         {
             if (PlotModel != null)
             {
@@ -134,13 +163,26 @@ namespace mainWindow
                 Title = legend,
                 Smooth = false,
             };
-            lineSerie.Points.AddRange(_data.GetDepenedncyPointsPv(param1, param2));
+            if (dataIndependent)
+            {
+                lineSerie.Points.AddRange(_data.GetDepenedncyPointsPv(param1, param2));
+            }
+            else
+            {
+                if (this._dataPoitsList.Count <2)
+                {
+                    MessageBox.Show("Количество добаленных точек меньше двух");
+                    return;
+                }
+                lineSerie.Points.AddRange(this.GetPoints(param1, param2));
+            }
+    
             PlotModel.Series.Add(lineSerie);
 
 
         }
 
-
+#endregion
 
         private ICommand _calcMuXi;
         private ICommand _calcK;
@@ -150,6 +192,9 @@ namespace mainWindow
         private ICommand _calcPQ;
         private ICommand _updateGraph;
         private ICommand _initializePlot;
+        private ICommand _addDataPoint;
+        private ICommand _showpv;
+        private ICommand _showqv;
 
         public ICommand CalcMu => _calcMuXi ?? (_calcMuXi = new RelayCommand(delegate { _data.CalcXi(); _data.CalcMu(); }));
         public ICommand CalcK => _calcK ?? (_calcK = new RelayCommand(_data.CalcK));
@@ -157,8 +202,12 @@ namespace mainWindow
         public ICommand CalcLambdaZero => _calcLambdaZero ?? (_calcLambdaZero = new RelayCommand(_data.CalcLambdaZero));
         public ICommand CalcLambdas => _calcLambdas ?? (_calcLambdas = new RelayCommand(_data.CalcLambdas));
         public ICommand CalcPQ => _calcPQ ?? (_calcPQ = new RelayCommand(_data.CalcPQ));
-        public ICommand InitializePlot => _initializePlot ?? (_initializePlot = new RelayCommand(InitPlot));
-        public ICommand UpdateGraphCommand => _updateGraph ?? (_updateGraph = new RelayCommand(Doshit));
+        public ICommand ShowPMassPlot => _initializePlot ?? (_initializePlot = new RelayCommand(ShowPMass));
+        public ICommand ShowQMassPlot => _updateGraph ?? (_updateGraph = new RelayCommand(ShowQMass));
+        public ICommand ShowPVPlot => _showpv ?? (_showpv = new RelayCommand(ShowPV));
+        public ICommand ShowQVPlot => _showqv ?? (_showqv = new RelayCommand(ShowQV));
+
+        public ICommand AddDataPonit => _addDataPoint ?? (_addDataPoint = new RelayCommand(AddDataPoint));
 
        
 

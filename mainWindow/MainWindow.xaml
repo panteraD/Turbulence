@@ -36,7 +36,7 @@
                             <dc:LabelTextBox x:Name="LtbTime"  Label="Время, за которое определяется уровень риска, час." Text="{Binding Data.Time}"   Width="Auto"/>
                             <dc:LabelTextBox x:Name="LtbL"  Label="Масштаб турбулентности, м"  Text="{Binding Data.L}"   Width="Auto"/>
                             <dc:LabelTextBox x:Name="LtbHeight"  Label="Высота полета, м" Text="{Binding Data.Height}" Width="Auto" />
-                            <dc:LabelTextBox x:Name="LtbVelocity"  Label="Скорость полета, м/с" Text="{Binding Data.Velocity}" Width="Auto" />
+                            <dc:LabelTextBox x:Name="LtbVelocity"  Label="Скорость полета, м/с" Text="{Binding Data.Velocity}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"  Width="Auto" />
                         </StackPanel>
                     </Border>
 
@@ -44,8 +44,8 @@
                         <StackPanel>
                             <Label x:Name="Step2Label" Content="Расчет K'" />
                             <Button x:Name="CalcXiMu" Content="Рассчитать μ и χ"  Command="{Binding CalcMu}" />
-                            <dc:LabelTextBox x:Name="LtbMu" Label="&#956;" Text="{Binding Data.Mu}"  />
-                            <dc:LabelTextBox x:Name="LtbXi" Label="&#967;" Text="{Binding Data.Xi}"  />
+                            <dc:LabelTextBox x:Name="LtbMu" Label="&#956;" Text="{Binding Data.Mu}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"  />
+                            <dc:LabelTextBox x:Name="LtbXi" Label="&#967;" Text="{Binding Data.Xi}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
                             <dc:LabelTextBox x:Name="LtbKDash" Label="K'" Text="{Binding Data.KDash}"  />
                         </StackPanel>
                     </Border>
@@ -54,13 +54,13 @@
                     <Border Grid.Column="0"  Grid.Row="1" BorderThickness="3" BorderBrush="BlanchedAlmond">
                         <StackPanel >
                             <Label x:Name="Step3Label" Content="Расчет K" ></Label>
-                            <dc:LabelTextBox x:Name="LtbYAlpha" Label="Y alpha" Text="{Binding Data.YAlpha}" />
-                            <dc:LabelTextBox x:Name="LtbBetha" Label="&#946;"  Text="{Binding Data.Betha}" />
-                            <dc:LabelTextBox x:Name="LtbG" Label="g" Text="{Binding Data.G}"  />
+                            <dc:LabelTextBox x:Name="LtbYAlpha" Label="Y alpha" Text="{Binding Data.YAlpha}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
+                            <dc:LabelTextBox x:Name="LtbBetha" Label="&#946;"  Text="{Binding Data.Betha}"  ReadOnly="True" TextBoxBackGround="BlanchedAlmond"/>
+                            <dc:LabelTextBox x:Name="LtbG" Label="g" Text="{Binding Data.G}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"  />
                             <Button x:Name="CalcK" Content="Рассчитать K"  Command="{Binding CalcK}"  ></Button>
-                            <dc:LabelTextBox x:Name="LtbK" Label="K" Text="{Binding Data.K}"   />
+                            <dc:LabelTextBox x:Name="LtbK" Label="K" Text="{Binding Data.K}"  ReadOnly="True" TextBoxBackGround="BlanchedAlmond"  />
                             <Label x:Name="Step4Label" Content="Расчет B" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                            <dc:LabelTextBox x:Name="LtbB" Label="B" Text="{Binding Data.B}"   VerticalAlignment="Top" Margin="0,0,99.8,0"/>
+                            <dc:LabelTextBox x:Name="LtbB" Label="B" Text="{Binding Data.B}"   VerticalAlignment="Top" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"/>
                             <Button x:Name="CalcB" Content="Рассчитать B"  Command="{Binding CalcB}" />
                         </StackPanel>
                     </Border>
@@ -71,18 +71,19 @@
                     <Border Grid.Column="1"  Grid.Row="1" BorderThickness="3" BorderBrush="BlanchedAlmond">
                         <StackPanel >
                             <Label x:Name="Label" Content="Расчет &#955;" />
-                            <dc:LabelTextBox Label="&#955;" Text="{Binding Data.LambdaZero}" />
+                            <dc:LabelTextBox Label="&#955;" Text="{Binding Data.LambdaZero}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
                             <Button x:Name="CalcLambdaZero" Content="Рассчитать &#955;"   Command="{Binding CalcLambdaZero}"/>
                             <dc:LabelTextBox Label="b__1" Text="{Binding Data.BOne}" />
                             <dc:LabelTextBox Label="b__2" Text="{Binding Data.BTwo}" />
                             <Button x:Name="CalcLambdas" Command="{Binding CalcLambdas}" Content="Рассчиать λ__01 и λ__02"  />
-                            <dc:LabelTextBox Label="&#955;__01" Text="{Binding Data.LambdaOne}" />
-                            <dc:LabelTextBox Label="&#955;__02" Text="{Binding Data.LambdaTwo}" />
+                            <dc:LabelTextBox Label="&#955;__01" Text="{Binding Data.LambdaOne}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
+                            <dc:LabelTextBox Label="&#955;__02" Text="{Binding Data.LambdaTwo}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"/>
                             <dc:LabelTextBox Label="t_1" Text="{Binding Data.TimeOne}" />
                             <dc:LabelTextBox Label="t_2" Text="{Binding Data.TimeTwo}" />
                             <Button x:Name="CalcPQ" Content="Рассчитать P и Q"  Command="{Binding CalcPQ}" />
-                            <dc:LabelTextBox Label="Уровень безопастности полетов P " Text="{Binding Data.P}" Margin="0,0,-0.2,0" />
-                            <dc:LabelTextBox Label="Уровень риска Q" Text="{Binding Data.Q}"  Margin="0,0,-0.2,0"  />
+                            <dc:LabelTextBox Label="Уровень безопастности полетов P " Text="{Binding Data.P}" Margin="0,0,-0.2,0" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
+                            <dc:LabelTextBox Label="Уровень риска Q" Text="{Binding Data.Q}"   ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
+                            <Button Content="Добавить точку к графику" Command="{Binding AddDataPonit}"></Button>
                         </StackPanel>
                     </Border>
 
@@ -112,13 +113,27 @@
             <TabItem Header="Graph">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="30"></RowDefinition>
-                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="60"></RowDefinition>
+                      
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Button Content="Зависимость P от массы" Command="{Binding InitializePlot}"  Height="30" Grid.Row="0" ></Button>
-                    <Button Content="Зависимость Q от массы" Command="{Binding UpdateGraphCommand}"  Height="30" Grid.Row="1" ></Button>
-                    <Grid Grid.Row="2" >
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Content="Зависимость P от массы" Command="{Binding ShowPMassPlot}"  Width="300" Grid.Column="0" Grid.Row="0"  ></Button>
+                        <Button Content="Зависимость Q от массы" Command="{Binding ShowQMassPlot}"  Width="300"  Grid.Column="0" Grid.Row="1" ></Button>
+                        <Button Content="Зависимость P от скорости" Command="{Binding ShowPVPlot}"  Width="300"  Grid.Column="1" Grid.Row="0" ></Button>
+                        <Button Content="Зависимость Q от скорости" Command="{Binding ShowQVPlot}"  Width="300"  Grid.Column="1" Grid.Row="1" ></Button>
+                        
+                    </Grid>
+                    
+                    <Grid Grid.Row="1" >
                         <Button Height="30" Width="300" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                         <oxy:PlotView x:Name="Plot1" Model="{Binding PlotModel}"/>
                     </Grid>

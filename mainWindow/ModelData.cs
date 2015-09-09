@@ -33,6 +33,40 @@ namespace mainWindow
            
         }
 
+        public ModelData Clone()
+        {
+            ModelData newData = new ModelData();
+            newData.Mass = _mass;
+            newData.Cy = _c_y;
+            newData.Ps = _p_s;
+            newData.Ba = _b_a;
+            newData.MaxNumber=_max_number;
+            newData.Square = _square;
+            newData.NMax=_n_max;
+            newData.Time =_time;
+            newData.TimeOne=_time1;
+            newData.TimeTwo=_time2;
+            newData.L=_l;
+            newData.Velocity = _velocity;
+            newData.Height = _height;
+            newData.Mu = _mu;
+            newData.Xi = _xi;
+            newData.KDash = _kdash;
+            newData.G = _g;
+            newData.Betha = _betha;
+            newData.YAlpha = _yalpha;
+            newData.K=_k;
+            newData.B=_b;
+            newData.LambdaZero =_lambdaZero;
+            newData.LambdaOne =_lambdaOne;
+            newData.LambdaTwo=_lambdaTwo;
+            newData.BOne=_bOne;
+            newData.BTwo=_bTwo;
+            newData.P=_p;
+            newData.Q=_q;
+            return newData;
+        }
+
         #endregion
 
         #region private_fileds
@@ -207,12 +241,12 @@ namespace mainWindow
         public List<DataPoint> GetDepenedncyPointsPv(String propX, String propY)
         {
             List<DataPoint> list = new List<DataPoint>();
-            ModelData copy;
+            ModelData copy = this.Clone();
             
             double oldValue = (double)this.GetType().GetProperty(propX).GetValue(this, null);
             double inc = oldValue/100;
-            this.GetType().GetProperty(propX).SetValue(this, 1000f);
-            for (int i = 0; i < 200; i++)
+            this.GetType().GetProperty(propX).SetValue(this, 0);
+            for (int i = 0; i < 400; i++)
             {
                 CalcALL();
                 list.Add(new DataPoint((double)this.GetType().GetProperty(propX).GetValue(this, null), (double)this.GetType().GetProperty(propY).GetValue(this, null)));

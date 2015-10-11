@@ -101,6 +101,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Artist.cs" />
+    <Compile Include="DrawingCanvas.cs" />
     <Compile Include="ModelData.cs" />
     <Compile Include="LabelTextBox.xaml.cs">
       <DependentUpon>LabelTextBox.xaml</DependentUpon>
@@ -111,6 +113,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PlaneVisual.cs" />
     <Compile Include="ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -144,6 +147,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Table.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\planeGreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\planeRed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\planeYellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SumatraPDFPortable_3.0.paf.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

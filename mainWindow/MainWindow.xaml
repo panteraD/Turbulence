@@ -125,11 +125,14 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Button Content="Зависимость P от массы" Command="{Binding ShowPMassPlot}"  Width="300" Grid.Column="0" Grid.Row="0"  ></Button>
                         <Button Content="Зависимость Q от массы" Command="{Binding ShowQMassPlot}"  Width="300"  Grid.Column="0" Grid.Row="1" ></Button>
                         <Button Content="Зависимость P от скорости" Command="{Binding ShowPVPlot}"  Width="300"  Grid.Column="1" Grid.Row="0" ></Button>
                         <Button Content="Зависимость Q от скорости" Command="{Binding ShowQVPlot}"  Width="300"  Grid.Column="1" Grid.Row="1" ></Button>
+                        <Button Content="Зависимость P от высоты" Command="{Binding ShowPHPlot}"  Width="300"  Grid.Column="2" Grid.Row="0" ></Button>
+                        <Button Content="Зависимость Q от высоты" Command="{Binding ShowQHPlot}"  Width="300"  Grid.Column="2" Grid.Row="1" ></Button>
                         
                     </Grid>
                     
@@ -139,6 +142,12 @@
                     </Grid>
                 </Grid>
             </TabItem>
+            <TabItem Header="Canvas" MouseDoubleClick="Control_OnMouseDoubleClick">
+                <dc:DrawingCanvas x:Name="DrawingCanvasGrid">
+                    
+                </dc:DrawingCanvas>
+            </TabItem>
+            
         </TabControl>
 
 

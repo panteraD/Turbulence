@@ -11,7 +11,7 @@ namespace mainWindow
     public class ModelData : INotifyPropertyChanged
     {
         private MainWindow window;
-        public static Double MAXCONVERT = 340.3f;
+        private static Double MAXCONVERT = 340.3f;
         private static Double GFORCE = 9.81;
         private static Double NU = 0.4; //only for M < 1
 
@@ -30,7 +30,7 @@ namespace mainWindow
 
         public ModelData()
         {
-
+           
         }
 
         public ModelData Clone()
@@ -40,13 +40,13 @@ namespace mainWindow
             newData.Cy = _c_y;
             newData.Ps = _p_s;
             newData.Ba = _b_a;
-            newData.MaxNumber = _max_number;
+            newData.MaxNumber=_max_number;
             newData.Square = _square;
-            newData.NMax = _n_max;
-            newData.Time = _time;
-            newData.TimeOne = _time1;
-            newData.TimeTwo = _time2;
-            newData.L = _l;
+            newData.NMax=_n_max;
+            newData.Time =_time;
+            newData.TimeOne=_time1;
+            newData.TimeTwo=_time2;
+            newData.L=_l;
             newData.Velocity = _velocity;
             newData.Height = _height;
             newData.Mu = _mu;
@@ -55,15 +55,15 @@ namespace mainWindow
             newData.G = _g;
             newData.Betha = _betha;
             newData.YAlpha = _yalpha;
-            newData.K = _k;
-            newData.B = _b;
-            newData.LambdaZero = _lambdaZero;
-            newData.LambdaOne = _lambdaOne;
-            newData.LambdaTwo = _lambdaTwo;
-            newData.BOne = _bOne;
-            newData.BTwo = _bTwo;
-            newData.P = _p;
-            newData.Q = _q;
+            newData.K=_k;
+            newData.B=_b;
+            newData.LambdaZero =_lambdaZero;
+            newData.LambdaOne =_lambdaOne;
+            newData.LambdaTwo=_lambdaTwo;
+            newData.BOne=_bOne;
+            newData.BTwo=_bTwo;
+            newData.P=_p;
+            newData.Q=_q;
             return newData;
         }
 
@@ -155,11 +155,11 @@ namespace mainWindow
         public double BTwo { get { return _bTwo; } set { _bTwo = value; OnPropertyChanged("BTwo"); } }
         public double LambdaOne { get { return _lambdaOne; } set { _lambdaOne = value; OnPropertyChanged("LambdaOne"); } }
         public double LambdaTwo { get { return _lambdaTwo; } set { _lambdaTwo = value; OnPropertyChanged("LambdaTwo"); } }
-        public double TimeOne { get { return _time1; } set { _time1 = value; OnPropertyChanged("TimeOne"); } }
+        public double TimeOne  { get { return _time1; } set { _time1 = value; OnPropertyChanged("TimeOne"); } }
         public double TimeTwo { get { return _time2; } set { _time2 = value; OnPropertyChanged("TimeTwo"); } }
         public double P { get { return _p; } set { _p = value; OnPropertyChanged("P"); } }
         public double Q { get { return _q; } set { _q = value; OnPropertyChanged("Q"); } }
-
+    
 
 
 
@@ -182,12 +182,12 @@ namespace mainWindow
             Xi = Ba / L;
         }
 
-
+        
         public void CalcG()
         {
-            G = Ps * Velocity * Velocity / 2f;
+            G = Ps * Velocity * Velocity/2f;
         }
-
+ 
 
         public void CalcYAlpha()
         {
@@ -204,29 +204,29 @@ namespace mainWindow
             CalcG();
             CalcBetha();
             CalcYAlpha();
-            K = Math.Sqrt(1f - 1.5f * YAlpha / Betha) / (1f - YAlpha / Betha);
+            K= Math.Sqrt(1f - 1.5f * YAlpha / Betha) / (1f - YAlpha / Betha);
         }
 
         public void CalcB()
         {
-            B = K * KDash * Cy * Ps * Velocity * Square / (2f * Mass * GFORCE);
+            B = K*KDash*Cy*Ps*Velocity*Square/(2f*Mass*GFORCE);
         }
 
         public void CalcLambdaZero()
         {
-            LambdaZero = Velocity * NU * 1000f / (Math.Sqrt(Ba * L) * K * KDash);
-
+            LambdaZero = Velocity*NU*1000f/(Math.Sqrt(Ba*L)*K*KDash);
+            
         }
 
         public void CalcLambdas()
         {
-            LambdaOne = LambdaZero * Math.Exp(-NMax / (B * BOne));
-            LambdaTwo = LambdaZero * Math.Exp(-NMax / (B * BTwo));
+            LambdaOne = LambdaZero*Math.Exp(-NMax/(B*BOne));
+            LambdaTwo = LambdaZero*Math.Exp(-NMax/(B*BTwo));
         }
 
         public void CalcPQ()
         {
-            P = Math.Exp(-(TimeOne * LambdaOne + TimeTwo * LambdaTwo) * Time);
+            P = Math.Exp(-(TimeOne*LambdaOne + TimeTwo*LambdaTwo)*Time);
             Q = 1f - P;
         }
 
@@ -238,24 +238,24 @@ namespace mainWindow
         #endregion
 
 
-        public List<DataPoint> GetDepenedncyPointsPv(String propX, String propY, Double upperBorder)
+        public List<DataPoint> GetDepenedncyPointsPv(String propX, String propY)
         {
             List<DataPoint> list = new List<DataPoint>();
             ModelData copy = this.Clone();
-
+            
             double oldValue = (double)this.GetType().GetProperty(propX).GetValue(this, null);
-            double inc = oldValue / 100;
+            double inc = oldValue/100;
             this.GetType().GetProperty(propX).SetValue(this, 0);
-            for (int i = 0; (double)this.GetType().GetProperty(propX).GetValue(this, null) < upperBorder && i< 400; i++)
+            for (int i = 0; i < 400; i++)
             {
                 CalcALL();
                 list.Add(new DataPoint((double)this.GetType().GetProperty(propX).GetValue(this, null), (double)this.GetType().GetProperty(propY).GetValue(this, null)));
-                this.GetType().GetProperty(propX).SetValue(this, (double)this.GetType().GetProperty(propX).GetValue(this, null) + inc);
+                this.GetType().GetProperty(propX).SetValue(this, (double)this.GetType().GetProperty(propX).GetValue(this, null) + inc); 
             }
             this.GetType().GetProperty(propX).SetValue(this, oldValue);
             return list;
         }
 
-
+        
     }
 }

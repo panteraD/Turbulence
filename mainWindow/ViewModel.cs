@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
-
+using System.Windows.Documents;
 using System.Windows.Input;
-
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using OxyPlot;
 using OxyPlot.Axes;
@@ -70,7 +73,7 @@ namespace mainWindow
             data.BOne = 1.04;
             data.BTwo = 3.38;
             data.TimeOne = 0.085;
-            data.TimeTwo = 0.00005;
+            data.TimeTwo = 0.0005;
         }
 
         private void AddDataPoint()
@@ -95,45 +98,34 @@ namespace mainWindow
 
         private void ShowPMass()
         {
-            //TODO: если из всех точек отобрать отличющиеся по массе, но совпадющие по базовым характерисиккам, чтобы не получилось каши
-            UpdatePlot("Mass","P","P","масса, кг","зависимость P от массы",false,0);
+
+            UpdatePlot("Mass","P","P","масса, кг","зависимость P от массы",false);
         }
 
         public void ShowQMass()
         {
 
-            UpdatePlot("Mass", "Q", "Q", "масса, кг", "зависимость Q от массы",false,0);
+            UpdatePlot("Mass", "Q", "Q", "масса, кг", "зависимость Q от массы",false);
 
         }
 
         public void ShowPV()
         {
-            UpdatePlot("Velocity", "P","P","скорость, м/с", "зависимость P от скорости",true,ModelData.MAXCONVERT);
+            UpdatePlot("Velocity", "P","P","скорость, м/с", "зависимость P от скорости",true);
         }
 
         public void ShowQV()
         {
-            UpdatePlot("Velocity", "Q", "Q", "скорость, м/с", "зависимость Q от скорости", true, ModelData.MAXCONVERT);
-        }
-
-
-        public void ShowPH()
-        {
-            UpdatePlot("Height", "P", "P", "высота, м", "зависимость P от высоты", false,0);
-        }
-
-        public void ShowQH()
-        {
-            UpdatePlot("Height", "Q", "Q", "высота, м", "зависимость Q от высоты", false, 0);
+            UpdatePlot("Velocity", "Q", "Q", "скорость, м/с", "зависимость Q от скорости", true);
         }
 
         #region Plottting methods
 
-        private void UpdatePlot(String xProp, String yProp, String xAxis, String yAxis, String legend, bool dataIndepended, double upperBorder)
+        private void UpdatePlot(String xProp, String yProp, String xAxis, String yAxis, String legend, bool dataIndepended)
         {
 
             SetUpModel(xAxis, yAxis);
-            LoadData(xProp, yProp, legend, dataIndepended, upperBorder);
+            LoadData(xProp, yProp, legend, dataIndepended);
         }
 
         private void SetUpModel(String xAxis, String yAxis)
@@ -153,7 +145,7 @@ namespace mainWindow
 
         }
 
-        public void LoadData(String param1, String param2, String legend, bool dataIndependent, double upperBorder)
+        public void LoadData(String param1, String param2, String legend, bool dataIndependent)
         {
             if (PlotModel != null)
             {
@@ -173,7 +165,7 @@ namespace mainWindow
             };
             if (dataIndependent)
             {
-                lineSerie.Points.AddRange(_data.GetDepenedncyPointsPv(param1, param2, upperBorder));
+                lineSerie.Points.AddRange(_data.GetDepenedncyPointsPv(param1, param2));
             }
             else
             {
@@ -203,8 +195,6 @@ namespace mainWindow
         private ICommand _addDataPoint;
         private ICommand _showpv;
         private ICommand _showqv;
-        private ICommand _showph;
-        private ICommand _showqh;
 
         public ICommand CalcMu => _calcMuXi ?? (_calcMuXi = new RelayCommand(delegate { _data.CalcXi(); _data.CalcMu(); }));
         public ICommand CalcK => _calcK ?? (_calcK = new RelayCommand(_data.CalcK));
@@ -216,8 +206,6 @@ namespace mainWindow
         public ICommand ShowQMassPlot => _updateGraph ?? (_updateGraph = new RelayCommand(ShowQMass));
         public ICommand ShowPVPlot => _showpv ?? (_showpv = new RelayCommand(ShowPV));
         public ICommand ShowQVPlot => _showqv ?? (_showqv = new RelayCommand(ShowQV));
-        public ICommand ShowPHPlot => _showph ?? (_showph = new RelayCommand(ShowPH));
-        public ICommand ShowQHPlot => _showqh ?? (_showqh = new RelayCommand(ShowQH));
 
         public ICommand AddDataPonit => _addDataPoint ?? (_addDataPoint = new RelayCommand(AddDataPoint));
 

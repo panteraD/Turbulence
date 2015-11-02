@@ -8,14 +8,26 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+		x86|Any CPU = x86|Any CPU
+		x86|x86 = x86|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6779A563-3F1C-4180-BA36-BB568155FFB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6779A563-3F1C-4180-BA36-BB568155FFB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6779A563-3F1C-4180-BA36-BB568155FFB1}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{6779A563-3F1C-4180-BA36-BB568155FFB1}.Debug|x86.ActiveCfg = Debug|x86
+		{6779A563-3F1C-4180-BA36-BB568155FFB1}.Debug|x86.Build.0 = Debug|x86
 		{6779A563-3F1C-4180-BA36-BB568155FFB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6779A563-3F1C-4180-BA36-BB568155FFB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6779A563-3F1C-4180-BA36-BB568155FFB1}.Release|x86.ActiveCfg = Release|x86
+		{6779A563-3F1C-4180-BA36-BB568155FFB1}.Release|x86.Build.0 = Release|x86
+		{6779A563-3F1C-4180-BA36-BB568155FFB1}.x86|Any CPU.ActiveCfg = x86|Any CPU
+		{6779A563-3F1C-4180-BA36-BB568155FFB1}.x86|Any CPU.Build.0 = x86|Any CPU
+		{6779A563-3F1C-4180-BA36-BB568155FFB1}.x86|x86.ActiveCfg = x86|x86
+		{6779A563-3F1C-4180-BA36-BB568155FFB1}.x86|x86.Build.0 = x86|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

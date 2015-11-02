@@ -37,3 +37,4 @@ C:\Users\chern\Documents\GitHub\Turbulence\mainWindow\obj\Release\mainWindow.Pro
 C:\Users\chern\Documents\GitHub\Turbulence\mainWindow\obj\Release\mainWindow.csproj.GenerateResource.Cache
 C:\Users\chern\Documents\GitHub\Turbulence\mainWindow\obj\Release\mainWindow.exe
 C:\Users\chern\Documents\GitHub\Turbulence\mainWindow\obj\Release\mainWindow.pdb
+C:\Users\chern\Documents\GitHub\Turbulence\mainWindow\obj\Release\mainWindow.csprojResolveAssemblyReference.cache

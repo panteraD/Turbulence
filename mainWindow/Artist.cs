@@ -10,7 +10,7 @@ namespace mainWindow
     {
         private Canvas drawingCanvas;
         //private ImageSource _planeGreenImgaImageSource;
-       // private ImageSource _planeYellowImageSource;
+        // private ImageSource _planeYellowImageSource;
         //private ImageSource _planeRedImageSource;
         private BitmapImage _planeGreenImage;
         private BitmapImage _planeYellowImage;
@@ -24,9 +24,7 @@ namespace mainWindow
             drawingCanvas = canvas;
             try
             {
-               // _planeGreenImage = new BitmapImage(new Uri("//Images//planeGreen.png"));
-                _planeGreenImage = new BitmapImage(new Uri("E://planegreen.png"));
-                
+                _planeGreenImage = new BitmapImage(new Uri("Images//planeGreen.png", UriKind.Relative));
             }
             catch (Exception e)
             {
@@ -46,7 +44,7 @@ namespace mainWindow
             using (DrawingContext dc = visual.RenderOpen())
             {
 
-                dc.DrawImage(_planeGreenImage, new Rect(position.X,position.Y,_planeGreenImage.PixelWidth/4,_planeGreenImage.PixelHeight/4));
+                dc.DrawImage(_planeGreenImage, new Rect(position.X, position.Y, _planeGreenImage.PixelWidth / 4, _planeGreenImage.PixelHeight / 4));
             }
 
             return visual;

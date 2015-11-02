@@ -6,7 +6,9 @@
         xmlns:dc="clr-namespace:mainWindow"
         xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="Влияние турбулентности на воздушное судно" Height="766" Width="1376">
+        
     <Window.DataContext>
         <dc:ViewModel></dc:ViewModel>
     </Window.DataContext>
@@ -46,29 +48,30 @@
                             <Button x:Name="CalcXiMu" Content="Рассчитать μ и χ"  Command="{Binding CalcMu}" />
                             <dc:LabelTextBox x:Name="LtbMu" Label="&#956;" Text="{Binding Data.Mu, StringFormat={}{0:F4}}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"  />
                             <dc:LabelTextBox x:Name="LtbXi" Label="&#967;" Text="{Binding Data.Xi, StringFormat={}{0:F4}}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
-                            <dc:LabelTextBox x:Name="LtbKDash" Label="K'" Text="{Binding Data.KDash, StringFormat={}{0:F4}}"  />
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="75"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <dc:LabelTextBox x:Name="LtbKDash" Label="K'" Text="{Binding Data.KDash, StringFormat={}{0:F4}}" Grid.Column="0" />
+                                <Label Grid.Column="1"  Content="(Находится по графику)" HorizontalAlignment="Left"></Label>
+                            </Grid>
+                            
+                            
+                            <Label x:Name="Step3Label" Content="Расчет K" Margin="0,0,0.2,0" />
+                            <dc:LabelTextBox x:Name="LtbYAlpha" Label="Y alpha" Text="{Binding Data.YAlpha, StringFormat=\{0:F4\}}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
+                            <dc:LabelTextBox x:Name="LtbBetha" Label="β"  Text="{Binding Data.Betha, StringFormat=\{0:F4\}}"  ReadOnly="True" TextBoxBackGround="BlanchedAlmond"/>
+                            <dc:LabelTextBox x:Name="LtbG" Label="g" Text="{Binding Data.G, StringFormat=\{0:F4\}}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"  />
+                            <Button x:Name="CalcK" Content="Рассчитать K"  Command="{Binding CalcK}"  />
+                            <dc:LabelTextBox x:Name="LtbK" Label="K" Text="{Binding Data.K, StringFormat=\{0:F4\}}"  ReadOnly="True" TextBoxBackGround="BlanchedAlmond"  />
+                            <Label x:Name="Step4Label" Content="Расчет B" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <Button x:Name="CalcB" Content="Рассчитать B"  Command="{Binding CalcB}" />
+                            <dc:LabelTextBox x:Name="LtbB" Label="B" Text="{Binding Data.B, StringFormat=\{0:F4\}}"   VerticalAlignment="Top" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"/>                          
                         </StackPanel>
                     </Border>
 
 
                     <Border Grid.Column="0"  Grid.Row="1" BorderThickness="3" BorderBrush="BlanchedAlmond">
-                        <StackPanel >
-                            <Label x:Name="Step3Label" Content="Расчет K" ></Label>
-                            <dc:LabelTextBox x:Name="LtbYAlpha" Label="Y alpha" Text="{Binding Data.YAlpha, StringFormat={}{0:F4}}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
-                            <dc:LabelTextBox x:Name="LtbBetha" Label="&#946;"  Text="{Binding Data.Betha, StringFormat={}{0:F4}}"  ReadOnly="True" TextBoxBackGround="BlanchedAlmond"/>
-                            <dc:LabelTextBox x:Name="LtbG" Label="g" Text="{Binding Data.G, StringFormat={}{0:F4}}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"  />
-                            <Button x:Name="CalcK" Content="Рассчитать K"  Command="{Binding CalcK}"  ></Button>
-                            <dc:LabelTextBox x:Name="LtbK" Label="K" Text="{Binding Data.K, StringFormat={}{0:F4}}"  ReadOnly="True" TextBoxBackGround="BlanchedAlmond"  />
-                            <Label x:Name="Step4Label" Content="Расчет B" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                            <dc:LabelTextBox x:Name="LtbB" Label="B" Text="{Binding Data.B, StringFormat={}{0:F4}}"   VerticalAlignment="Top" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"/>
-                            <Button x:Name="CalcB" Content="Рассчитать B"  Command="{Binding CalcB}" />
-                        </StackPanel>
-                    </Border>
-
-
-                    <StackPanel  Grid.Column="0" Grid.Row="1"/>
-
-                    <Border Grid.Column="1"  Grid.Row="1" BorderThickness="3" BorderBrush="BlanchedAlmond">
                         <StackPanel >
                             <Label x:Name="Label" Content="Расчет &#955;" />
                             <dc:LabelTextBox Label="&#955;" Text="{Binding Data.LambdaZero, StringFormat={}{0:F4}}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
@@ -88,6 +91,15 @@
                     </Border>
 
 
+                    <StackPanel  Grid.Column="0" Grid.Row="1"/>
+
+                    <Border Grid.Column="1"  Grid.Row="1" BorderThickness="3" BorderBrush="BlanchedAlmond">
+                        <StackPanel >
+                            
+                        </StackPanel>
+                    </Border>
+
+
                     <Border Grid.Column="1"  Grid.Row="0" BorderThickness="3" BorderBrush="BlanchedAlmond">
 
                     </Border>
@@ -101,20 +113,36 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0">
+                        <Label HorizontalAlignment="Center">Коэффициент К’</Label>
                         <Image Source="Images/K.png"  Stretch="UniformToFill" ></Image>
                     </StackPanel>
                     <StackPanel Grid.Column="1">
+                        <Label HorizontalAlignment="Center" >Модель атмосферной турбулентности</Label>
                         <Image Source="Images/Table.png"  Stretch="UniformToFill" ></Image>
                     </StackPanel>
 
 
                 </Grid>
             </TabItem>
+            <TabItem Header="Коэффициент К'">
+                <Grid>
+                    <StackPanel >
+                        <Label HorizontalAlignment="Center">Коэффициент К’</Label>
+                        <Image Source="Images/K.png"  Stretch="Fill"  VerticalAlignment="Top" HorizontalAlignment="Left" MaxWidth="800" ></Image>
+                    </StackPanel>
+                </Grid>                
+            </TabItem>
+            <TabItem Header="Модель атмосферной турбулентности">
+                <StackPanel>
+                    <Label HorizontalAlignment="Center" >Модель атмосферной турбулентности</Label>
+                    <Image Source="Images/Table.png"  Stretch="UniformToFill" ></Image>
+                </StackPanel>
+            </TabItem>
             <TabItem Header="Graph">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60"></RowDefinition>
-                      
+
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
@@ -133,21 +161,26 @@
                         <Button Content="Зависимость Q от скорости" Command="{Binding ShowQVPlot}"  Width="300"  Grid.Column="1" Grid.Row="1" ></Button>
                         <Button Content="Зависимость P от высоты" Command="{Binding ShowPHPlot}"  Width="300"  Grid.Column="2" Grid.Row="0" ></Button>
                         <Button Content="Зависимость Q от высоты" Command="{Binding ShowQHPlot}"  Width="300"  Grid.Column="2" Grid.Row="1" ></Button>
-                        
+
                     </Grid>
-                    
+
                     <Grid Grid.Row="1" >
                         <Button Height="30" Width="300" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                         <oxy:PlotView x:Name="Plot1" Model="{Binding PlotModel}"/>
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem Header="Canvas" MouseDoubleClick="Control_OnMouseDoubleClick">
+            <TabItem Header="Theory">
+                <WebBrowser Name="WebBrowser">
+
+                </WebBrowser>
+            </TabItem>
+            <TabItem Header="Canvas" MouseDoubleClick="Control_OnMouseDoubleClick" Visibility="Collapsed">
                 <dc:DrawingCanvas x:Name="DrawingCanvasGrid">
-                    
+
                 </dc:DrawingCanvas>
             </TabItem>
-            
+
         </TabControl>
 
 

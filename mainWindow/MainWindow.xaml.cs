@@ -20,6 +20,7 @@ using System.Timers;
 
 using System.Timers;
 using System.Windows.Threading;
+using WPFPdfViewer;
 
 
 namespace mainWindow
@@ -43,7 +44,7 @@ namespace mainWindow
             DataContext = viewModel;
             CompositionTarget.Rendering += CompositionTargetRendering;
             InitializeComponent();
-
+          //  WebBrowser.Navigate(new Uri("pack://application:,,,/mainWindow;component/Images/Theory.pdf"));
 
         }
 

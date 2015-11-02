@@ -182,6 +182,8 @@ namespace mainWindow
                     MessageBox.Show("Количество добаленных точек меньше двух");
                     return;
                 }
+                _dataPoitsList.Sort(); //sort there
+
                 lineSerie.Points.AddRange(this.GetPoints(param1, param2));
             }
     

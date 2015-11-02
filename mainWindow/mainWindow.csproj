@@ -143,10 +143,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="K.png" />
+    <Resource Include="Images\K.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Table.png" />
+    <Resource Include="Images\Table.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\planeGreen.png" />

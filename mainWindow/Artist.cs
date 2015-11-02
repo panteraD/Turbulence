@@ -27,18 +27,8 @@ namespace mainWindow
         public Artist(DrawingCanvas canvas)
         {
             drawingCanvas = canvas;
-            try
-            {
-               // _planeGreenImage = new BitmapImage(new Uri("//Images//planeGreen.png"));
-                _planeGreenImage = new BitmapImage(new Uri("E://planegreen.png"));
-                
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
 
-            }
-
+                _planeGreenImage = new BitmapImage(new Uri("pack://application:,,,/mainWindow;component/Images/planeGreen.png"));
         }
         /// <summary>
         /// Returns drawing visual instance of plane

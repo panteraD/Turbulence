@@ -26,17 +26,17 @@
 
                     <Border Name="BorderOne" Grid.Column="0" Grid.Row="0" BorderThickness="3" BorderBrush="BlanchedAlmond">
                         <StackPanel>
-                            <dc:LabelTextBox x:Name="LtbMass" Label="Масса, кг" Text="{Binding Data.Mass}"    Width="Auto"/>
-                            <dc:LabelTextBox x:Name="LtbCy"  Label="Коэффицент поъемной силы" Text="{Binding Data.Cy}"   Width="Auto" />
-                            <dc:LabelTextBox x:Name="LtbPs"  Label="Плотность воздуха, кг/м^3" Text="{Binding Data.Ps}"   Width="Auto"/>
-                            <dc:LabelTextBox x:Name="LtbSquare"  Label="Площадь крыла, м^2" Text="{Binding Data.Square}"   Width="Auto"/>
-                            <dc:LabelTextBox x:Name="LtbM"  Label="Число Маха" Text="{Binding Data.MaxNumber}"  Width="Auto"/>
-                            <dc:LabelTextBox x:Name="LtbBa" Label="Средняя аэродинамическая хорда, м" Text="{Binding Data.Ba}"   Width="Auto"/>
-                            <dc:LabelTextBox x:Name="LtbNMax"  Label="Максимальное приращанеие перегрузки" Text="{Binding Data.NMax}"   Width="Auto"/>
-                            <dc:LabelTextBox x:Name="LtbTime"  Label="Время, за которое определяется уровень риска, час." Text="{Binding Data.Time}"   Width="Auto"/>
-                            <dc:LabelTextBox x:Name="LtbL"  Label="Масштаб турбулентности, м"  Text="{Binding Data.L}"   Width="Auto"/>
-                            <dc:LabelTextBox x:Name="LtbHeight"  Label="Высота полета, м" Text="{Binding Data.Height}" Width="Auto" />
-                            <dc:LabelTextBox x:Name="LtbVelocity"  Label="Скорость полета, м/с" Text="{Binding Data.Velocity}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"  Width="Auto" />
+                            <dc:LabelTextBox x:Name="LtbMass" Label="Масса, кг" Text="{Binding Data.Mass, StringFormat={}{0:F4}}"    Width="Auto"/>
+                            <dc:LabelTextBox x:Name="LtbCy"  Label="Коэффицент поъемной силы" Text="{Binding Data.Cy, StringFormat={}{0:F4}}"   Width="Auto" />
+                            <dc:LabelTextBox x:Name="LtbPs"  Label="Плотность воздуха, кг/м^3" Text="{Binding Data.Ps, StringFormat={}{0:F4}}"   Width="Auto"/>
+                            <dc:LabelTextBox x:Name="LtbSquare"  Label="Площадь крыла, м^2" Text="{Binding Data.Square, StringFormat={}{0:F4}}"   Width="Auto"/>
+                            <dc:LabelTextBox x:Name="LtbM"  Label="Число Маха" Text="{Binding Data.MaxNumber, StringFormat={}{0:F4}}"  Width="Auto"/>
+                            <dc:LabelTextBox x:Name="LtbBa" Label="Средняя аэродинамическая хорда, м" Text="{Binding Data.Ba, StringFormat={}{0:F4}}"   Width="Auto"/>
+                            <dc:LabelTextBox x:Name="LtbNMax"  Label="Максимальное приращанеие перегрузки" Text="{Binding Data.NMax, StringFormat={}{0:F4}}"   Width="Auto"/>
+                            <dc:LabelTextBox x:Name="LtbTime"  Label="Время, за которое определяется уровень риска, час." Text="{Binding Data.Time, StringFormat={}{0:F4}}"   Width="Auto"/>
+                            <dc:LabelTextBox x:Name="LtbL"  Label="Масштаб турбулентности, м"  Text="{Binding Data.L, StringFormat={}{0:F4}}"   Width="Auto"/>
+                            <dc:LabelTextBox x:Name="LtbHeight"  Label="Высота полета, м" Text="{Binding Data.Height, StringFormat={}{0:F4}}" Width="Auto" />
+                            <dc:LabelTextBox x:Name="LtbVelocity"  Label="Скорость полета, м/с" Text="{Binding Data.Velocity, StringFormat={}{0:F4}}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"  Width="Auto" />
                         </StackPanel>
                     </Border>
 
@@ -44,9 +44,9 @@
                         <StackPanel>
                             <Label x:Name="Step2Label" Content="Расчет K'" />
                             <Button x:Name="CalcXiMu" Content="Рассчитать μ и χ"  Command="{Binding CalcMu}" />
-                            <dc:LabelTextBox x:Name="LtbMu" Label="&#956;" Text="{Binding Data.Mu}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"  />
-                            <dc:LabelTextBox x:Name="LtbXi" Label="&#967;" Text="{Binding Data.Xi}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
-                            <dc:LabelTextBox x:Name="LtbKDash" Label="K'" Text="{Binding Data.KDash}"  />
+                            <dc:LabelTextBox x:Name="LtbMu" Label="&#956;" Text="{Binding Data.Mu, StringFormat={}{0:F4}}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"  />
+                            <dc:LabelTextBox x:Name="LtbXi" Label="&#967;" Text="{Binding Data.Xi, StringFormat={}{0:F4}}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
+                            <dc:LabelTextBox x:Name="LtbKDash" Label="K'" Text="{Binding Data.KDash, StringFormat={}{0:F4}}"  />
                         </StackPanel>
                     </Border>
 
@@ -54,13 +54,13 @@
                     <Border Grid.Column="0"  Grid.Row="1" BorderThickness="3" BorderBrush="BlanchedAlmond">
                         <StackPanel >
                             <Label x:Name="Step3Label" Content="Расчет K" ></Label>
-                            <dc:LabelTextBox x:Name="LtbYAlpha" Label="Y alpha" Text="{Binding Data.YAlpha}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
-                            <dc:LabelTextBox x:Name="LtbBetha" Label="&#946;"  Text="{Binding Data.Betha}"  ReadOnly="True" TextBoxBackGround="BlanchedAlmond"/>
-                            <dc:LabelTextBox x:Name="LtbG" Label="g" Text="{Binding Data.G}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"  />
+                            <dc:LabelTextBox x:Name="LtbYAlpha" Label="Y alpha" Text="{Binding Data.YAlpha, StringFormat={}{0:F4}}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
+                            <dc:LabelTextBox x:Name="LtbBetha" Label="&#946;"  Text="{Binding Data.Betha, StringFormat={}{0:F4}}"  ReadOnly="True" TextBoxBackGround="BlanchedAlmond"/>
+                            <dc:LabelTextBox x:Name="LtbG" Label="g" Text="{Binding Data.G, StringFormat={}{0:F4}}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"  />
                             <Button x:Name="CalcK" Content="Рассчитать K"  Command="{Binding CalcK}"  ></Button>
-                            <dc:LabelTextBox x:Name="LtbK" Label="K" Text="{Binding Data.K}"  ReadOnly="True" TextBoxBackGround="BlanchedAlmond"  />
+                            <dc:LabelTextBox x:Name="LtbK" Label="K" Text="{Binding Data.K, StringFormat={}{0:F4}}"  ReadOnly="True" TextBoxBackGround="BlanchedAlmond"  />
                             <Label x:Name="Step4Label" Content="Расчет B" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                            <dc:LabelTextBox x:Name="LtbB" Label="B" Text="{Binding Data.B}"   VerticalAlignment="Top" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"/>
+                            <dc:LabelTextBox x:Name="LtbB" Label="B" Text="{Binding Data.B, StringFormat={}{0:F4}}"   VerticalAlignment="Top" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"/>
                             <Button x:Name="CalcB" Content="Рассчитать B"  Command="{Binding CalcB}" />
                         </StackPanel>
                     </Border>
@@ -71,18 +71,18 @@
                     <Border Grid.Column="1"  Grid.Row="1" BorderThickness="3" BorderBrush="BlanchedAlmond">
                         <StackPanel >
                             <Label x:Name="Label" Content="Расчет &#955;" />
-                            <dc:LabelTextBox Label="&#955;" Text="{Binding Data.LambdaZero}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
+                            <dc:LabelTextBox Label="&#955;" Text="{Binding Data.LambdaZero, StringFormat={}{0:F4}}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
                             <Button x:Name="CalcLambdaZero" Content="Рассчитать &#955;"   Command="{Binding CalcLambdaZero}"/>
-                            <dc:LabelTextBox Label="b__1" Text="{Binding Data.BOne}" />
-                            <dc:LabelTextBox Label="b__2" Text="{Binding Data.BTwo}" />
+                            <dc:LabelTextBox Label="b__1" Text="{Binding Data.BOne, StringFormat={}{0:F4}}" />
+                            <dc:LabelTextBox Label="b__2" Text="{Binding Data.BTwo, StringFormat={}{0:F4}}" />
                             <Button x:Name="CalcLambdas" Command="{Binding CalcLambdas}" Content="Рассчиать λ__01 и λ__02"  />
-                            <dc:LabelTextBox Label="&#955;__01" Text="{Binding Data.LambdaOne}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
-                            <dc:LabelTextBox Label="&#955;__02" Text="{Binding Data.LambdaTwo}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"/>
-                            <dc:LabelTextBox Label="t_1" Text="{Binding Data.TimeOne}" />
-                            <dc:LabelTextBox Label="t_2" Text="{Binding Data.TimeTwo}" />
+                            <dc:LabelTextBox Label="&#955;__01" Text="{Binding Data.LambdaOne, StringFormat={}{0:F4}}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
+                            <dc:LabelTextBox Label="&#955;__02" Text="{Binding Data.LambdaTwo, StringFormat={}{0:F4}}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"/>
+                            <dc:LabelTextBox Label="t_1" Text="{Binding Data.TimeOne, StringFormat={}{0:F6}}" />
+                            <dc:LabelTextBox Label="t_2" Text="{Binding Data.TimeTwo, StringFormat={}{0:F6}}" />
                             <Button x:Name="CalcPQ" Content="Рассчитать P и Q"  Command="{Binding CalcPQ}" />
-                            <dc:LabelTextBox Label="Уровень безопастности полетов P " Text="{Binding Data.P}" Margin="0,0,-0.2,0" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
-                            <dc:LabelTextBox Label="Уровень риска Q" Text="{Binding Data.Q}"   ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
+                            <dc:LabelTextBox Label="Уровень безопастности полетов P " Text="{Binding Data.P, StringFormat={}{0:F4}}" Margin="0,0,-0.2,0" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
+                            <dc:LabelTextBox Label="Уровень риска Q" Text="{Binding Data.Q, StringFormat={}{0:F4}}"   ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
                             <Button Content="Добавить точку к графику" Command="{Binding AddDataPonit}"></Button>
                         </StackPanel>
                     </Border>
@@ -101,10 +101,10 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0">
-                        <Image Source="K.png"  Stretch="UniformToFill" ></Image>
+                        <Image Source="Images/K.png"  Stretch="UniformToFill" ></Image>
                     </StackPanel>
                     <StackPanel Grid.Column="1">
-                        <Image Source="Table.png"  Stretch="UniformToFill" ></Image>
+                        <Image Source="Images/Table.png"  Stretch="UniformToFill" ></Image>
                     </StackPanel>
 
 

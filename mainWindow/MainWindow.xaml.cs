@@ -44,7 +44,7 @@ namespace mainWindow
             DataContext = viewModel;
             CompositionTarget.Rendering += CompositionTargetRendering;
             InitializeComponent();
-          //  WebBrowser.Navigate(new Uri("pack://application:,,,/mainWindow;component/Images/Theory.pdf"));
+           
 
         }
 

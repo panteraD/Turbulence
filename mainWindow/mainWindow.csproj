@@ -70,6 +70,7 @@
       <HintPath>..\packages\OxyPlot.Wpf.2014.1.546\lib\net45\OxyPlot.Xps.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -110,7 +111,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Artist.cs" />
     <Compile Include="DrawingCanvas.cs" />
     <Compile Include="ModelData.cs" />
     <Compile Include="LabelTextBox.xaml.cs">
@@ -122,7 +122,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PlaneVisual.cs" />
     <Compile Include="ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -141,6 +140,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Images\Task.xps" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -156,15 +156,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Table.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\planeGreen.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\planeRed.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\planeYellow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

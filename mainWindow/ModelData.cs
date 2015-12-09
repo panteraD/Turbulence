@@ -8,6 +8,9 @@ using OxyPlot;
 
 namespace mainWindow
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ModelData : INotifyPropertyChanged
     {
         private MainWindow window;
@@ -126,11 +129,8 @@ namespace mainWindow
             }
         }
         public double Square { get { return _square; } set { _square = value; OnPropertyChanged("Square"); } }
-        public double NMax { get { return _n_max; } set { _n_max = value; OnPropertyChanged("NMax"); } }  //Макс приращение прегрузки
+        public double NMax { get { return _n_max; } set { _n_max = value; OnPropertyChanged("NMax"); } } 
         public double Time { get { return _time; } set { _time = value; OnPropertyChanged("Time"); } }
-        /// <summary>
-        /// Масштаб турбулентности
-        /// </summary>
         public double L { get { return _l; } set { _l = value; OnPropertyChanged("L"); } }
         public double Velocity { get { return _velocity; } set { _velocity = value; OnPropertyChanged("Velocity"); } }
         public double Height { get { return _height; } set { _height = value; OnPropertyChanged("Height"); } }

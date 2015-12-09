@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 
 using System.Windows;
-
+using System.Windows.Controls;
 using System.Windows.Input;
 
 using GalaSoft.MvvmLight.CommandWpf;
@@ -15,6 +15,7 @@ namespace mainWindow
 {
     class ViewModel : INotifyPropertyChanged
     {
+        private DataGrid dataGrid;
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(String propertyName)
         {
@@ -27,8 +28,13 @@ namespace mainWindow
 
         private ModelData _data;
         private PlotModel _plotModel;
-        private List<ModelData> _dataPoitsList = new List<ModelData>(); 
+        private List<ModelData> _dataPoitsList = new List<ModelData>();
 
+        public List<ModelData> DataPoitsList
+        {
+            get { return _dataPoitsList; }
+            set { _dataPoitsList = value; OnPropertyChanged("DataPoitsLists"); }
+        }
 
 
         public ModelData Data
@@ -50,7 +56,13 @@ namespace mainWindow
             _data = new ModelData();
             InitData(_data);
             _plotModel = new PlotModel();
-           
+        
+        }
+
+        public DataGrid DataGrid
+        {
+            get { return dataGrid; }
+            set { dataGrid = value; }
         }
 
         private void InitData(ModelData data)
@@ -76,7 +88,10 @@ namespace mainWindow
         private void AddDataPoint()
         {
             _dataPoitsList.Add(_data.Clone());
-            MessageBox.Show(_dataPoitsList.Count.ToString());
+            dataGrid.ItemsSource = null;
+            dataGrid.ItemsSource = DataPoitsList;
+
+
 
         }
 
@@ -182,7 +197,7 @@ namespace mainWindow
                     MessageBox.Show("Количество добаленных точек меньше двух");
                     return;
                 }
-                _dataPoitsList.Sort(); //sort there
+                _dataPoitsList.Sort(delegate (ModelData c1, ModelData c2) { return c1.Mass.CompareTo(c2.Mass); });
 
                 lineSerie.Points.AddRange(this.GetPoints(param1, param2));
             }

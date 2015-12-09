@@ -7,6 +7,7 @@
         xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
+        Icon="Images/plane.ico"
         Title="Влияние турбулентности на воздушное судно" Height="766" Width="1376">
         
     <Window.DataContext>
@@ -97,8 +98,8 @@
                         <DataGrid x:Name="dataGrid"  AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Масса" Width="175" Binding="{Binding Path=Mass, StringFormat={}0.####}"></DataGridTextColumn>
-                                <DataGridTextColumn Header="ню" Binding="{Binding Path=Mu, StringFormat={}0.####}"></DataGridTextColumn>
-                                <DataGridTextColumn Header="кси" Binding="{Binding Path=Xi, StringFormat={}0.####}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="&#956;" Binding="{Binding Path=Mu, StringFormat={}0.####}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="&#967;" Binding="{Binding Path=Xi, StringFormat={}0.####}"></DataGridTextColumn>
                                 <DataGridTextColumn Header="K`" Binding="{Binding Path=KDash, StringFormat={}0.####}"></DataGridTextColumn>
                                 <DataGridTextColumn Header="P" Binding="{Binding Path=P, StringFormat={}0.####}"></DataGridTextColumn>
                                 <DataGridTextColumn Header="Q" Binding="{Binding Path=Q, StringFormat={}0.####}"></DataGridTextColumn>

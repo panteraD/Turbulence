@@ -65,6 +65,7 @@ namespace mainWindow
             set { dataGrid = value; }
         }
 
+        //TODO: delete 
         private void InitData(ModelData data)
         {
             data.Height = 10000;
@@ -87,6 +88,10 @@ namespace mainWindow
 
         private void AddDataPoint()
         {
+            if (_data.P.Equals(0))
+            {
+                return;
+            }
             _dataPoitsList.Add(_data.Clone());
             dataGrid.ItemsSource = null;
             dataGrid.ItemsSource = DataPoitsList;

@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("sumatrapdfportable_3.0.paf.exe")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/plane.ico")]
 
 

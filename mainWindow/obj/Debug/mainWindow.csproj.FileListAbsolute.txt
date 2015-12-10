@@ -68,10 +68,14 @@ C:\Users\chern\Documents\GitHub\Turbulence\mainWindow\bin\Debug\GalaSoft.MvvmLig
 C:\Users\chern\Documents\GitHub\Turbulence\mainWindow\bin\Debug\GalaSoft.MvvmLight.xml
 C:\Users\chern\Documents\GitHub\Turbulence\mainWindow\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
 C:\Users\chern\Documents\GitHub\Turbulence\mainWindow\bin\Debug\GalaSoft.MvvmLight.Platform.xml
-C:\Users\chern\Documents\GitHub\Turbulence\mainWindow\obj\Debug\mainWindow.csprojResolveAssemblyReference.cache
 C:\Users\chern\Documents\GitHub\Turbulence\mainWindow\bin\Debug\AxInterop.AcroPDFLib.dll
 C:\Users\chern\Documents\GitHub\Turbulence\mainWindow\bin\Debug\log4net.dll
 C:\Users\chern\Documents\GitHub\Turbulence\mainWindow\bin\Debug\MoonPdfLib.dll
 C:\Users\chern\Documents\GitHub\Turbulence\mainWindow\bin\Debug\MouseKeyboardActivityMonitor.dll
 C:\Users\chern\Documents\GitHub\Turbulence\mainWindow\bin\Debug\WPFPdfViewer.dll
 C:\Users\chern\Documents\GitHub\Turbulence\mainWindow\bin\Debug\log4net.xml
+C:\Users\chern\Documents\GitHub\Turbulence\mainWindow\bin\Debug\mainWindow.exe.manifest
+C:\Users\chern\Documents\GitHub\Turbulence\mainWindow\bin\Debug\mainWindow.application
+C:\Users\chern\Documents\GitHub\Turbulence\mainWindow\obj\Debug\mainWindow.TrustInfo.xml
+C:\Users\chern\Documents\GitHub\Turbulence\mainWindow\obj\Debug\mainWindow.exe.manifest
+C:\Users\chern\Documents\GitHub\Turbulence\mainWindow\obj\Debug\mainWindow.application

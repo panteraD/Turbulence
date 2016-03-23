@@ -1,30 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Text.RegularExpressions;
-using System.Globalization;
-using System.ComponentModel;
 using System.IO;
-using System.IO.Packaging;
-using System.Net;
-using System.Reflection;
-using System.Timers;
-
-using System.Timers;
-using System.Windows.Threading;
 using System.Windows.Xps.Packaging;
-using WPFPdfViewer;
+
 
 
 namespace mainWindow
@@ -42,14 +21,15 @@ namespace mainWindow
             InitializeComponent();
 
             viewModel = new ViewModel();
-
             DataContext = viewModel;
-
-            viewModel.DataGrid = dataGrid;
+            //bind dataGrids
+            viewModel.DataGridMass = dataGridMass;
+            viewModel.DataGridSpeed = dataGridSpeed;
+   
            
    
 
-
+            
             string taskDocName = "Task.xps";
             string theoryDocName = "Theory.xps";
 
@@ -58,12 +38,6 @@ namespace mainWindow
 
             TaskDocumentViewer.Document = taskXpsDocument.GetFixedDocumentSequence();
             TheoryDocumentViewer.Document = theoryXpsDocument.GetFixedDocumentSequence();
-
-
-
-           
-
-
 
 
         }

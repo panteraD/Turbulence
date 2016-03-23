@@ -119,6 +119,9 @@ namespace mainWindow
         /// Средняя аэродимаческая хорда
         /// </summary>  
         public double Ba { get { return _b_a; } set { _b_a = value; OnPropertyChanged("Ba"); } }
+        /// <summary>
+        /// Число Маха
+        /// </summary>
         public double MaxNumber
         {
             get { return _max_number; }
@@ -237,7 +240,7 @@ namespace mainWindow
         }
         #endregion
 
-
+        //Возвращает список с для графика скорости
         public List<DataPoint> GetDepenedncyPointsPv(String propX, String propY, Double upperBorder)
         {
             List<DataPoint> list = new List<DataPoint>();

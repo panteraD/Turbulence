@@ -16,7 +16,7 @@
 
     <Grid x:Name="Main" >
         <TabControl>
-            <TabItem Header="Main">
+            <TabItem Header="Вычисления">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" MinWidth="400"  />
@@ -87,7 +87,8 @@
                             <Button x:Name="CalcPQ" Content="Рассчитать P и Q"  Command="{Binding CalcPQ}" />
                             <dc:LabelTextBox Label="Уровень безопастности полетов P " Text="{Binding Data.P, StringFormat={}0.####}" Margin="0,0,-0.2,0" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
                             <dc:LabelTextBox Label="Уровень риска Q" Text="{Binding Data.Q, StringFormat={}0.####}"   ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
-                            <Button Content="Добавить точку к графику" Command="{Binding AddDataPonit}"></Button>
+                            
+                            
                         </StackPanel>
                     </Border>
 
@@ -95,18 +96,39 @@
 
                     <!--ItemsSource="{Binding DataPoitsList}"-->
                     <Border Grid.Column="1"  Grid.Row="1" BorderThickness="3" BorderBrush="BlanchedAlmond">
-                        <DataGrid x:Name="dataGrid"  AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" >
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Масса" Width="175" Binding="{Binding Path=Mass, StringFormat={}0.####}"></DataGridTextColumn>
-                                <DataGridTextColumn Header="&#956;" Binding="{Binding Path=Mu, StringFormat={}0.####}"></DataGridTextColumn>
-                                <DataGridTextColumn Header="&#967;" Binding="{Binding Path=Xi, StringFormat={}0.####}"></DataGridTextColumn>
-                                <DataGridTextColumn Header="K`" Binding="{Binding Path=KDash, StringFormat={}0.####}"></DataGridTextColumn>
-                                <DataGridTextColumn Header="P" Binding="{Binding Path=P, StringFormat={}0.####}"></DataGridTextColumn>
-                                <DataGridTextColumn Header="Q" Binding="{Binding Path=Q, StringFormat={}0.####}"></DataGridTextColumn>
+                        <Grid x:Name="DataGridsHolder">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Button Content="Добавить точку к графику Массы" Command="{Binding AddDataPonitMass}" Grid.Column="0" Grid.Row="0"></Button>
+                            <DataGrid x:Name="dataGridMass"  AutoGenerateColumns="False" ColumnHeaderHeight="30" ColumnWidth="*" MinColumnWidth="20" SelectionMode="Single" SelectionUnit="FullRow"  Grid.Column="0" Grid.Row="1">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Масса" IsReadOnly="True" Binding="{Binding Path=Mass, StringFormat={}0.####}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="&#956;" IsReadOnly="True" Binding="{Binding Path=Mu, StringFormat={}0.####}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="&#967;" IsReadOnly="True" Binding="{Binding Path=Xi, StringFormat={}0.####}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="K`" IsReadOnly="True" Binding="{Binding Path=KDash, StringFormat={}0.####}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="P" IsReadOnly="True" Binding="{Binding Path=P, StringFormat={}0.####}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Q" IsReadOnly="True" Binding="{Binding Path=Q, StringFormat={}0.####}"></DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Button Content="Добавить точку к графику Скорости" Command="{Binding AddDataPonitSpeed}" Grid.Column="1" Grid.Row="0"></Button>
+                            <DataGrid x:Name="dataGridSpeed" AutoGenerateColumns="False" ColumnHeaderHeight="30" ColumnWidth="*" MinColumnWidth="20" SelectionMode="Single" SelectionUnit="FullRow" Grid.Column="1" Grid.Row="1" >
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Число Маха" IsReadOnly="True" Binding="{Binding Path=MaxNumber, StringFormat={}0.####}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="P" IsReadOnly="True" Binding="{Binding Path=P, StringFormat={}0.####}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Q" IsReadOnly="True" Binding="{Binding Path=Q, StringFormat={}0.####}"></DataGridTextColumn>
+                                </DataGrid.Columns>
                                 
-                            </DataGrid.Columns>
-                        </DataGrid>
+                            </DataGrid>
+                        </Grid>
+                        
                     </Border>
+                    
 
 
 
@@ -127,7 +149,7 @@
                     <Image Source="Images/Table.png"  Stretch="UniformToFill" ></Image>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Graph">
+            <TabItem Header="Графики">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60"></RowDefinition>
@@ -158,12 +180,12 @@
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="Task" Header="Task">
+            <TabItem x:Name="Task" Header="Задание">
                 <DocumentViewer x:Name="TaskDocumentViewer">
                     
                 </DocumentViewer>
             </TabItem>
-            <TabItem Header="Theory">
+            <TabItem Header="Теория">
                 <DocumentViewer x:Name="TheoryDocumentViewer">
 
                 </DocumentViewer>

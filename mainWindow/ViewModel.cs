@@ -15,7 +15,10 @@ namespace mainWindow
 {
     class ViewModel : INotifyPropertyChanged
     {
-        private DataGrid dataGrid;
+        //контейнеры для точек, кторе будут использоваться для пострения графиков
+        private DataGrid dataGridMass; 
+        private DataGrid dataGridSpeed;
+        //binding stuff
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(String propertyName)
         {
@@ -28,13 +31,29 @@ namespace mainWindow
 
         private ModelData _data;
         private PlotModel _plotModel;
-        private List<ModelData> _dataPoitsList = new List<ModelData>();
+        private List<ModelData> _dataMassPointsList = new List<ModelData>();
+        private List<ModelData> _dataSpeedPointsList = new List<ModelData>();
 
-        public List<ModelData> DataPoitsList
+        public enum SortByWhat
         {
-            get { return _dataPoitsList; }
-            set { _dataPoitsList = value; OnPropertyChanged("DataPoitsLists"); }
+            Mass,
+            Speed
+        };
+
+        
+        
+
+        public List<ModelData> DataMassPointsList
+        {
+            get { return _dataMassPointsList; }
+            set { _dataMassPointsList = value; OnPropertyChanged("DataMassPointsList"); }
         }
+
+        public List<ModelData> DataSpeedPointsList
+        {
+            get { return _dataSpeedPointsList; }
+            set { _dataSpeedPointsList = value; OnPropertyChanged("DataSpeedPointsList"); }
+        } 
 
 
         public ModelData Data
@@ -59,11 +78,18 @@ namespace mainWindow
         
         }
 
-        public DataGrid DataGrid
+        public DataGrid DataGridMass
         {
-            get { return dataGrid; }
-            set { dataGrid = value; }
+            get { return dataGridMass; }
+            set { dataGridMass = value; }
         }
+
+        public DataGrid DataGridSpeed
+        {
+            get { return dataGridSpeed; }
+            set { dataGridSpeed = value; }
+        }
+
 
         //TODO: delete 
         private void InitData(ModelData data)
@@ -86,24 +112,33 @@ namespace mainWindow
             data.TimeTwo = 0.00005;
         }
 
-        private void AddDataPoint()
+        private void AddDataPointForMassList()
         {
             if (_data.P.Equals(0))
             {
                 return;
             }
-            _dataPoitsList.Add(_data.Clone());
-            dataGrid.ItemsSource = null;
-            dataGrid.ItemsSource = DataPoitsList;
-
-
-
+            _dataMassPointsList.Add(_data.Clone());
+            dataGridMass.ItemsSource = null;
+            dataGridMass.ItemsSource = DataMassPointsList;
         }
 
-        public List<DataPoint> GetPoints(String propX, String propY)
+        private void AddDataPointForSpeedList()
+        {
+            if (_data.P.Equals(0))
+            {
+                return;
+            }
+            _dataSpeedPointsList.Add(_data.Clone());
+            dataGridSpeed.ItemsSource = null;
+            dataGridSpeed.ItemsSource = DataSpeedPointsList;
+        }
+
+        //?????
+        public List<DataPoint> GetPoints(String propX, String propY, List<ModelData> dataPointsList)
         {
             List<DataPoint> list =new List<DataPoint>();
-            foreach(ModelData data in _dataPoitsList)
+            foreach(ModelData data in dataPointsList)
             {
                 list.Add(new DataPoint((double)data.GetType().GetProperty(propX).GetValue(data, null), (double)data.GetType().GetProperty(propY).GetValue(data, null)));   
             }
@@ -116,64 +151,48 @@ namespace mainWindow
         private void ShowPMass()
         {
             //TODO: если из всех точек отобрать отличющиеся по массе, но совпадющие по базовым характерисиккам, чтобы не получилось каши
-            UpdatePlot("Mass","P","P","масса, кг","зависимость P от массы",false,0);
+            UpdatePlot("Mass","P","P","масса, кг","зависимость P от массы",false,this._dataMassPointsList,SortByWhat.Mass);
         }
 
         public void ShowQMass()
         {
 
-            UpdatePlot("Mass", "Q", "Q", "масса, кг", "зависимость Q от массы",false,0);
+            UpdatePlot("Mass", "Q", "Q", "масса, кг", "зависимость Q от массы",false, this._dataMassPointsList, SortByWhat.Mass);
 
         }
 
         public void ShowPV()
         {
-            UpdatePlot("Velocity", "P","P","скорость, м/с", "зависимость P от скорости",true,ModelData.MAXCONVERT);
+            UpdatePlot("Velocity", "P","P","скорость, м/с", "зависимость P от скорости",false, this._dataSpeedPointsList, SortByWhat.Speed);
         }
 
         public void ShowQV()
         {
-            UpdatePlot("Velocity", "Q", "Q", "скорость, м/с", "зависимость Q от скорости", true, ModelData.MAXCONVERT);
+            UpdatePlot("Velocity", "Q", "Q", "скорость, м/с", "зависимость Q от скорости", false, this._dataSpeedPointsList, SortByWhat.Speed);
         }
 
 
-        public void ShowPH()
-        {
-            UpdatePlot("Height", "P", "P", "высота, м", "зависимость P от высоты", false,0);
-        }
-
-        public void ShowQH()
-        {
-            UpdatePlot("Height", "Q", "Q", "высота, м", "зависимость Q от высоты", false, 0);
-        }
+     
 
         #region Plottting methods
 
-        private void UpdatePlot(String xProp, String yProp, String xAxis, String yAxis, String legend, bool dataIndepended, double upperBorder)
+        private void UpdatePlot(String xProp, String yProp, String xAxis, String yAxis, String legend, bool dataIndepended, List<ModelData> dataPointsList, SortByWhat sortByWhat)
         {
 
-            SetUpModel(xAxis, yAxis);
-            LoadData(xProp, yProp, legend, dataIndepended, upperBorder);
+            SetUpAxes(xAxis, yAxis);
+            LoadData(xProp, yProp, legend, dataIndepended, dataPointsList,sortByWhat);
         }
 
-        private void SetUpModel(String xAxis, String yAxis)
+        private void SetUpAxes(String xAxis, String yAxis)
         {
-            /*
-            PlotModel.LegendTitle = legend;
-            PlotModel.LegendOrientation = LegendOrientation.Horizontal;
-            PlotModel.LegendPlacement = LegendPlacement.Outside;
-            PlotModel.LegendPosition = LegendPosition.TopRight;
-            PlotModel.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
-            PlotModel.LegendBorder = OxyColors.Black;
-            */
+           
             PlotModel.Axes.Clear();
             PlotModel.Axes.Add(new LinearAxis(AxisPosition.Left, 0) { Title = xAxis });
             PlotModel.Axes.Add(new LinearAxis(AxisPosition.Bottom, 0) { Title = yAxis });
 
-
         }
 
-        public void LoadData(String param1, String param2, String legend, bool dataIndependent, double upperBorder)
+        public void LoadData(String param1, String param2, String legend, bool dataIndependent, List<ModelData> dataPointsList, SortByWhat sortByWhat)
         {
             if (PlotModel != null)
             {
@@ -191,20 +210,33 @@ namespace mainWindow
                 Title = legend,
                 Smooth = false,
             };
+            //если точки можно рассчиать без пользовательских данных
             if (dataIndependent)
             {
-                lineSerie.Points.AddRange(_data.GetDepenedncyPointsPv(param1, param2, upperBorder));
+                //lineSerie.Points.AddRange(_data.GetDepenedncyPointsPv(param1, param2, upperBorder));
             }
             else
             {
-                if (this._dataPoitsList.Count <2)
+                if (dataPointsList != null && dataPointsList.Count <2)
                 {
                     MessageBox.Show("Количество добаленных точек меньше двух");
                     return;
                 }
-                _dataPoitsList.Sort(delegate (ModelData c1, ModelData c2) { return c1.Mass.CompareTo(c2.Mass); });
 
-                lineSerie.Points.AddRange(this.GetPoints(param1, param2));
+                if (sortByWhat.Equals(SortByWhat.Mass))
+                {
+                    //сортировка  точек в листе по массе
+                    dataPointsList.Sort(delegate (ModelData c1, ModelData c2) { return c1.Mass.CompareTo(c2.Mass); });
+                }
+                else if (sortByWhat.Equals(SortByWhat.Speed))
+                {
+                    dataPointsList.Sort(delegate (ModelData c1, ModelData c2) { return c1.Velocity.CompareTo(c2.Velocity); });   
+                }
+
+                lineSerie.Points.AddRange(this.GetPoints(param1, param2,dataPointsList));
+
+
+
             }
     
             PlotModel.Series.Add(lineSerie);
@@ -222,7 +254,8 @@ namespace mainWindow
         private ICommand _calcPQ;
         private ICommand _updateGraph;
         private ICommand _initializePlot;
-        private ICommand _addDataPoint;
+        private ICommand _addDataPointMass;
+        private ICommand _addDataPointSpeed;
         private ICommand _showpv;
         private ICommand _showqv;
         private ICommand _showph;
@@ -238,10 +271,10 @@ namespace mainWindow
         public ICommand ShowQMassPlot => _updateGraph ?? (_updateGraph = new RelayCommand(ShowQMass));
         public ICommand ShowPVPlot => _showpv ?? (_showpv = new RelayCommand(ShowPV));
         public ICommand ShowQVPlot => _showqv ?? (_showqv = new RelayCommand(ShowQV));
-        public ICommand ShowPHPlot => _showph ?? (_showph = new RelayCommand(ShowPH));
-        public ICommand ShowQHPlot => _showqh ?? (_showqh = new RelayCommand(ShowQH));
+       
 
-        public ICommand AddDataPonit => _addDataPoint ?? (_addDataPoint = new RelayCommand(AddDataPoint));
+        public ICommand AddDataPonitMass => _addDataPointMass ?? (_addDataPointMass = new RelayCommand(AddDataPointForMassList));
+        public ICommand AddDataPonitSpeed => _addDataPointSpeed ?? (_addDataPointSpeed = new RelayCommand(AddDataPointForSpeedList));
 
        
 

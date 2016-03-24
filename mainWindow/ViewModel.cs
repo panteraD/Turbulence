@@ -15,10 +15,11 @@ namespace mainWindow
 {
     class ViewModel : INotifyPropertyChanged
     {
+
         //контейнеры для точек, кторе будут использоваться для пострения графиков
-        private DataGrid dataGridMass; 
+        private DataGrid dataGridMass;
         private DataGrid dataGridSpeed;
-        //binding stuff
+        #region binding stuff
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(String propertyName)
         {
@@ -29,8 +30,11 @@ namespace mainWindow
             }
         }
 
+        #endregion
         private ModelData _data;
         private PlotModel _plotModel;
+        private PointsDummy _pointsDummyMass;
+        private PointsDummy _pointsDummySpeed;
         private List<ModelData> _dataMassPointsList = new List<ModelData>();
         private List<ModelData> _dataSpeedPointsList = new List<ModelData>();
 
@@ -40,8 +44,10 @@ namespace mainWindow
             Speed
         };
 
-        
-        
+
+
+
+#region binding properties
 
         public List<ModelData> DataMassPointsList
         {
@@ -53,7 +59,7 @@ namespace mainWindow
         {
             get { return _dataSpeedPointsList; }
             set { _dataSpeedPointsList = value; OnPropertyChanged("DataSpeedPointsList"); }
-        } 
+        }
 
 
         public ModelData Data
@@ -62,7 +68,7 @@ namespace mainWindow
             set { _data = value; OnPropertyChanged("Data"); }
         }
 
-      
+
 
         public PlotModel PlotModel
         {
@@ -70,12 +76,28 @@ namespace mainWindow
             set { _plotModel = value; OnPropertyChanged("PlotModel"); }
         }
 
+        public PointsDummy PointsDummyMass
+        {
+            get { return _pointsDummyMass;}
+            set { _pointsDummyMass = value; OnPropertyChanged("PointsDummyMass"); }
+        }
+
+        public PointsDummy PointsDummySpeed
+        {
+            get { return _pointsDummySpeed;}
+            set { _pointsDummySpeed = value; OnPropertyChanged("PointsDummySpeed"); }
+        }
+
+#endregion
+
         public ViewModel()
         {
             _data = new ModelData();
             InitData(_data);
             _plotModel = new PlotModel();
-        
+            _pointsDummyMass = new PointsDummy();
+            _pointsDummySpeed = new PointsDummy();
+
         }
 
         public DataGrid DataGridMass
@@ -134,15 +156,15 @@ namespace mainWindow
             dataGridSpeed.ItemsSource = DataSpeedPointsList;
         }
 
-        //?????
+
         public List<DataPoint> GetPoints(String propX, String propY, List<ModelData> dataPointsList)
         {
-            List<DataPoint> list =new List<DataPoint>();
-            foreach(ModelData data in dataPointsList)
+            List<DataPoint> list = new List<DataPoint>();
+            foreach (ModelData data in dataPointsList)
             {
-                list.Add(new DataPoint((double)data.GetType().GetProperty(propX).GetValue(data, null), (double)data.GetType().GetProperty(propY).GetValue(data, null)));   
+                list.Add(new DataPoint((double)data.GetType().GetProperty(propX).GetValue(data, null), (double)data.GetType().GetProperty(propY).GetValue(data, null)));
             }
-            
+
             return list;
         }
 
@@ -151,19 +173,19 @@ namespace mainWindow
         private void ShowPMass()
         {
             //TODO: если из всех точек отобрать отличющиеся по массе, но совпадющие по базовым характерисиккам, чтобы не получилось каши
-            UpdatePlot("Mass","P","P","масса, кг","зависимость P от массы",false,this._dataMassPointsList,SortByWhat.Mass);
+            UpdatePlot("Mass", "P", "P", "масса, кг", "зависимость P от массы", false, this._dataMassPointsList, SortByWhat.Mass);
         }
 
         public void ShowQMass()
         {
 
-            UpdatePlot("Mass", "Q", "Q", "масса, кг", "зависимость Q от массы",false, this._dataMassPointsList, SortByWhat.Mass);
+            UpdatePlot("Mass", "Q", "Q", "масса, кг", "зависимость Q от массы", false, this._dataMassPointsList, SortByWhat.Mass);
 
         }
 
         public void ShowPV()
         {
-            UpdatePlot("Velocity", "P","P","скорость, м/с", "зависимость P от скорости",false, this._dataSpeedPointsList, SortByWhat.Speed);
+            UpdatePlot("Velocity", "P", "P", "скорость, м/с", "зависимость P от скорости", false, this._dataSpeedPointsList, SortByWhat.Speed);
         }
 
         public void ShowQV()
@@ -172,7 +194,102 @@ namespace mainWindow
         }
 
 
-     
+
+
+        //
+        public void Calc5Mass()
+        {
+            //copy some data
+            PointsDummyMass.ModelData1 = _data.CopyDataForMassCalc(PointsDummyMass.ModelData1);
+            PointsDummyMass.ModelData2 = _data.CopyDataForMassCalc(PointsDummyMass.ModelData2);
+            PointsDummyMass.ModelData3 = _data.CopyDataForMassCalc(PointsDummyMass.ModelData3);
+            PointsDummyMass.ModelData4 = _data.CopyDataForMassCalc(PointsDummyMass.ModelData4);
+            PointsDummyMass.ModelData5 = _data.CopyDataForMassCalc(PointsDummyMass.ModelData5);
+                       
+            //do calculation
+            PointsDummyMass.ModelData1.CalcMu();
+            PointsDummyMass.ModelData2.CalcMu();
+            PointsDummyMass.ModelData3.CalcMu();
+            PointsDummyMass.ModelData4.CalcMu();
+            PointsDummyMass.ModelData5.CalcMu();
+
+            PointsDummyMass.ModelData1.CalcXi();
+            PointsDummyMass.ModelData2.CalcXi();
+            PointsDummyMass.ModelData3.CalcXi();
+            PointsDummyMass.ModelData4.CalcXi();
+            PointsDummyMass.ModelData5.CalcXi();
+        }
+
+        public void Calc5KDash()
+        {
+            PointsDummyMass.ModelData1.CalcK();
+            PointsDummyMass.ModelData2.CalcK();
+            PointsDummyMass.ModelData3.CalcK();
+            PointsDummyMass.ModelData4.CalcK();
+            PointsDummyMass.ModelData5.CalcK();
+
+            PointsDummyMass.ModelData1.CalcB();
+            PointsDummyMass.ModelData2.CalcB();
+            PointsDummyMass.ModelData3.CalcB();
+            PointsDummyMass.ModelData4.CalcB();
+            PointsDummyMass.ModelData5.CalcB();
+
+            PointsDummyMass.ModelData1.CalcLambdaZero();
+            PointsDummyMass.ModelData2.CalcLambdaZero();
+            PointsDummyMass.ModelData3.CalcLambdaZero();
+            PointsDummyMass.ModelData4.CalcLambdaZero();
+            PointsDummyMass.ModelData5.CalcLambdaZero();
+
+            PointsDummyMass.ModelData1.CalcLambdas();
+            PointsDummyMass.ModelData2.CalcLambdas();
+            PointsDummyMass.ModelData3.CalcLambdas();
+            PointsDummyMass.ModelData4.CalcLambdas();
+            PointsDummyMass.ModelData5.CalcLambdas();
+
+            PointsDummyMass.ModelData1.CalcPQ();
+            PointsDummyMass.ModelData2.CalcPQ();
+            PointsDummyMass.ModelData3.CalcPQ();
+            PointsDummyMass.ModelData4.CalcPQ();
+            PointsDummyMass.ModelData5.CalcPQ();
+
+            DataMassPointsList.Clear();
+            DataMassPointsList.Add(PointsDummyMass.ModelData1);
+            DataMassPointsList.Add(PointsDummyMass.ModelData2);
+            DataMassPointsList.Add(PointsDummyMass.ModelData3);
+            DataMassPointsList.Add(PointsDummyMass.ModelData4);
+            DataMassPointsList.Add(PointsDummyMass.ModelData5);
+
+            dataGridMass.ItemsSource = null;
+            dataGridMass.ItemsSource = DataMassPointsList;
+        }
+
+        public void Calc5Speed()
+        {
+            PointsDummySpeed.ModelData1 = _data.CopyDataForSpeedCalc(PointsDummySpeed.ModelData1);
+            PointsDummySpeed.ModelData2 = _data.CopyDataForSpeedCalc(PointsDummySpeed.ModelData2);
+            PointsDummySpeed.ModelData3 = _data.CopyDataForSpeedCalc(PointsDummySpeed.ModelData3);
+            PointsDummySpeed.ModelData4 = _data.CopyDataForSpeedCalc(PointsDummySpeed.ModelData4);
+            PointsDummySpeed.ModelData5 = _data.CopyDataForSpeedCalc(PointsDummySpeed.ModelData5);
+          
+
+            PointsDummySpeed.ModelData1.CalcALL();
+            PointsDummySpeed.ModelData2.CalcALL();
+            PointsDummySpeed.ModelData3.CalcALL();
+            PointsDummySpeed.ModelData4.CalcALL();
+            PointsDummySpeed.ModelData5.CalcALL();
+
+            DataSpeedPointsList.Clear();
+            DataSpeedPointsList.Add(PointsDummySpeed.ModelData1);
+            DataSpeedPointsList.Add(PointsDummySpeed.ModelData2);
+            DataSpeedPointsList.Add(PointsDummySpeed.ModelData3);
+            DataSpeedPointsList.Add(PointsDummySpeed.ModelData4);
+            DataSpeedPointsList.Add(PointsDummySpeed.ModelData5);
+            dataGridSpeed.ItemsSource = null;
+            dataGridSpeed.ItemsSource = DataSpeedPointsList;
+        }
+
+
+
 
         #region Plottting methods
 
@@ -180,12 +297,12 @@ namespace mainWindow
         {
 
             SetUpAxes(xAxis, yAxis);
-            LoadData(xProp, yProp, legend, dataIndepended, dataPointsList,sortByWhat);
+            LoadData(xProp, yProp, legend, dataIndepended, dataPointsList, sortByWhat);
         }
 
         private void SetUpAxes(String xAxis, String yAxis)
         {
-           
+
             PlotModel.Axes.Clear();
             PlotModel.Axes.Add(new LinearAxis(AxisPosition.Left, 0) { Title = xAxis });
             PlotModel.Axes.Add(new LinearAxis(AxisPosition.Bottom, 0) { Title = yAxis });
@@ -217,7 +334,7 @@ namespace mainWindow
             }
             else
             {
-                if (dataPointsList != null && dataPointsList.Count <2)
+                if (dataPointsList != null && dataPointsList.Count < 2)
                 {
                     MessageBox.Show("Количество добаленных точек меньше двух");
                     return;
@@ -230,22 +347,23 @@ namespace mainWindow
                 }
                 else if (sortByWhat.Equals(SortByWhat.Speed))
                 {
-                    dataPointsList.Sort(delegate (ModelData c1, ModelData c2) { return c1.Velocity.CompareTo(c2.Velocity); });   
+                    dataPointsList.Sort(delegate (ModelData c1, ModelData c2) { return c1.Velocity.CompareTo(c2.Velocity); });
                 }
 
-                lineSerie.Points.AddRange(this.GetPoints(param1, param2,dataPointsList));
+                lineSerie.Points.AddRange(this.GetPoints(param1, param2, dataPointsList));
 
 
 
             }
-    
+
             PlotModel.Series.Add(lineSerie);
 
 
         }
 
-#endregion
+        #endregion
 
+#region click handlers
         private ICommand _calcMuXi;
         private ICommand _calcK;
         private ICommand _calcB;
@@ -260,6 +378,10 @@ namespace mainWindow
         private ICommand _showqv;
         private ICommand _showph;
         private ICommand _showqh;
+        //для построения графиков
+        private ICommand _put5Mass;
+        private ICommand _put5Kdash;
+        private ICommand _put5Speed;
 
         public ICommand CalcMu => _calcMuXi ?? (_calcMuXi = new RelayCommand(delegate { _data.CalcXi(); _data.CalcMu(); }));
         public ICommand CalcK => _calcK ?? (_calcK = new RelayCommand(_data.CalcK));
@@ -271,12 +393,17 @@ namespace mainWindow
         public ICommand ShowQMassPlot => _updateGraph ?? (_updateGraph = new RelayCommand(ShowQMass));
         public ICommand ShowPVPlot => _showpv ?? (_showpv = new RelayCommand(ShowPV));
         public ICommand ShowQVPlot => _showqv ?? (_showqv = new RelayCommand(ShowQV));
-       
+
 
         public ICommand AddDataPonitMass => _addDataPointMass ?? (_addDataPointMass = new RelayCommand(AddDataPointForMassList));
         public ICommand AddDataPonitSpeed => _addDataPointSpeed ?? (_addDataPointSpeed = new RelayCommand(AddDataPointForSpeedList));
 
-       
+        public ICommand Put5Mass => _put5Mass ?? (_put5Mass = new RelayCommand(Calc5Mass));
+        public ICommand Put5Kdash => _put5Kdash ?? (_put5Kdash = new RelayCommand(Calc5KDash));
+        public ICommand Put5Speed => _put5Speed ?? (_put5Speed = new RelayCommand(Calc5Speed));
+
+#endregion
+
 
 
 

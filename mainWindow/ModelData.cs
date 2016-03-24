@@ -8,9 +8,6 @@ using OxyPlot;
 
 namespace mainWindow
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class ModelData : INotifyPropertyChanged
     {
         private MainWindow window;
@@ -69,6 +66,52 @@ namespace mainWindow
             newData.Q = _q;
             return newData;
         }
+
+
+       
+                               
+                    
+
+        public ModelData CopyDataForMassCalc(ModelData newData)
+        {
+            newData.Cy = _c_y;
+            newData.Ps = _p_s;
+            newData.Ba = _b_a;
+            newData.MaxNumber = _max_number;
+            newData.Square = _square;
+            newData.NMax = _n_max;
+            newData.Time = _time;
+            newData.TimeOne = _time1;
+            newData.TimeTwo = _time2;
+            newData.L = _l;
+            newData.Velocity = _velocity;
+            newData.Height = _height;
+            newData.BOne = _bOne;
+            newData.BTwo = _bTwo;
+            
+            return newData;
+        }
+
+        public ModelData CopyDataForSpeedCalc(ModelData newData)
+        {
+            newData.Mass = _mass;
+            newData.Cy = _c_y;
+            newData.Ps = _p_s;
+            newData.Ba = _b_a;
+            newData.Square = _square;
+            newData.NMax = _n_max;
+            newData.Time = _time;
+            newData.TimeOne = _time1;
+            newData.TimeTwo = _time2;
+            newData.L = _l;
+            newData.Height = _height;
+            newData.BOne = _bOne;
+            newData.BTwo = _bTwo;
+            newData.KDash = _kdash;
+            return newData;
+        }
+
+
 
         #endregion
 

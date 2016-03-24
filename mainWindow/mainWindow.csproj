@@ -138,6 +138,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PointsDummy.cs" />
     <Compile Include="DrawingCanvas.cs" />
     <Compile Include="ModelData.cs" />
     <Compile Include="LabelTextBox.xaml.cs">

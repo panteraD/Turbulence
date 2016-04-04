@@ -35,7 +35,7 @@
                             <dc:LabelTextBox x:Name="LtbSquare"  Label="Площадь крыла, м^2" Text="{Binding Data.Square, StringFormat={}0.####}"   Width="Auto"/>
                             <dc:LabelTextBox x:Name="LtbM"  Label="Число Маха" Text="{Binding Data.MaxNumber, StringFormat={}0.####}"  Width="Auto"/>
                             <dc:LabelTextBox x:Name="LtbBa" Label="Средняя аэродинамическая хорда, м" Text="{Binding Data.Ba, StringFormat={}0.####}"   Width="Auto"/>
-                            <dc:LabelTextBox x:Name="LtbNMax"  Label="Максимальное приращанеие перегрузки" Text="{Binding Data.NMax, StringFormat={}0.####}"   Width="Auto"/>
+                            <dc:LabelTextBox x:Name="LtbNMax"  Label="Vаксимальное приращение перегрузки" Text="{Binding Data.NMax, StringFormat={}0.####}"   Width="Auto"/>
                             <dc:LabelTextBox x:Name="LtbTime"  Label="Время, за которое определяется уровень риска, час." Text="{Binding Data.Time, StringFormat={}0.####}"   Width="Auto"/>
                             <dc:LabelTextBox x:Name="LtbL"  Label="Масштаб турбулентности, м"  Text="{Binding Data.L, StringFormat={}0.####}"   Width="Auto"/>
                             <dc:LabelTextBox x:Name="LtbHeight"  Label="Высота полета, м" Text="{Binding Data.Height, StringFormat={}0.####}" Width="Auto" />
@@ -79,7 +79,7 @@
                             <Button x:Name="CalcLambdaZero" Content="Рассчитать &#955;"   Command="{Binding CalcLambdaZero}"/>
                             <dc:LabelTextBox Label="b__1" Text="{Binding Data.BOne, StringFormat={}0.####}" />
                             <dc:LabelTextBox Label="b__2" Text="{Binding Data.BTwo, StringFormat={}0.####}" />
-                            <Button x:Name="CalcLambdas" Command="{Binding CalcLambdas}" Content="Рассчиать λ__01 и λ__02"  />
+                            <Button x:Name="CalcLambdas" Command="{Binding CalcLambdas}" Content="Рассчитать λ__01 и λ__02"  />
                             <dc:LabelTextBox Label="&#955;__01" Text="{Binding Data.LambdaOne, StringFormat={}0.##########}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
                             <!-- 10 digit precision-->
                             <dc:LabelTextBox Label="&#955;__02" Text="{Binding Data.LambdaTwo, StringFormat={}0.##########}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"/>
@@ -136,7 +136,7 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Быстрое вычисление точек">
+            <TabItem Header="Исходные данные для графиков">
                 <Grid>
 
                     <Grid>

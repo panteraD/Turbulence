@@ -77,10 +77,6 @@
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MoonPdfLib, Version=0.3.0.0, Culture=neutral, processorArchitecture=x86">
-      <HintPath>..\packages\MoonPdfLib-x86.0.3.0\lib\MoonPdfLib.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="MouseKeyboardActivityMonitor, Version=3.0.1.29653, Culture=neutral, processorArchitecture=x86">
       <HintPath>..\packages\MoonPdfLib-x86.0.3.0\lib\MouseKeyboardActivityMonitor.dll</HintPath>
       <Private>True</Private>
@@ -139,7 +135,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PointsDummy.cs" />
-    <Compile Include="DrawingCanvas.cs" />
     <Compile Include="ModelData.cs" />
     <Compile Include="LabelTextBox.xaml.cs">
       <DependentUpon>LabelTextBox.xaml</DependentUpon>

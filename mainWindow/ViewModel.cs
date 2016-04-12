@@ -15,8 +15,6 @@ namespace mainWindow
 {
     class ViewModel : INotifyPropertyChanged
     {
-
-        //контейнеры для точек, кторе будут использоваться для пострения графиков
         private DataGrid dataGridMass;
         private DataGrid dataGridSpeed;
         #region binding stuff
@@ -113,10 +111,7 @@ namespace mainWindow
         }
 
 
-        /// <summary>
-        /// inits defaults values for faster testing
-        /// </summary>
-        /// <param name="data"></param>
+      
         private void InitData(ModelData data)
         {
             data.Height = 10000;
@@ -315,16 +310,7 @@ namespace mainWindow
             PlotModel.PlotMargins = new OxyThickness(40, 40, 40, 40);
         }
 
-        /// <summary>
-        /// returns starting point for xAxis
-        /// </summary>
-        /// <param name="param1"></param>
-        /// <param name="param2"></param>
-        /// <param name="legend"></param>
-        /// <param name="dataIndependent"></param>
-        /// <param name="dataPointsList"></param>
-        /// <param name="sortByWhat"></param>
-        /// <returns></returns>
+       
         public void LoadData(String param1, String param2, String legend, bool dataIndependent, List<ModelData> dataPointsList, SortByWhat sortByWhat)
         {
             if (PlotModel != null)
@@ -414,11 +400,5 @@ namespace mainWindow
         public ICommand Put5Speed => _put5Speed ?? (_put5Speed = new RelayCommand(Calc5Speed));
 
         #endregion
-
-
-
-
-
-
     }
 }

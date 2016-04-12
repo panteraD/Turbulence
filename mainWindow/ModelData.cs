@@ -1,19 +1,15 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OxyPlot;
 
 namespace mainWindow
 {
     public class ModelData : INotifyPropertyChanged
     {
-        private MainWindow window;
-        public static Double MAXCONVERT = 340.3f;
-        private static Double GFORCE = 9.81;
-        private static Double NU = 0.4; //only for M < 1
+        public const Double MAXCONVERT = 340.3f;
+        private const Double GFORCE = 9.81;
+        private const Double NU = 0.4; //only for M < 1
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(String propertyName)
@@ -206,14 +202,6 @@ namespace mainWindow
         public double P { get { return _p; } set { _p = value; OnPropertyChanged("P"); } }
         public double Q { get { return _q; } set { _q = value; OnPropertyChanged("Q"); } }
 
-
-
-
-
-
-
-
-
         #endregion
 
         #region Mathematical Calculations
@@ -283,7 +271,7 @@ namespace mainWindow
         }
         #endregion
 
-        //Возвращает список с для графика скорости
+       
         public List<DataPoint> GetDepenedncyPointsPv(String propX, String propY, Double upperBorder)
         {
             List<DataPoint> list = new List<DataPoint>();

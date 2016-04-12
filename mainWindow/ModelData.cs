@@ -1,22 +1,15 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OxyPlot;
 
 namespace mainWindow
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class ModelData : INotifyPropertyChanged
     {
-        private MainWindow window;
-        public static Double MAXCONVERT = 340.3f;
-        private static Double GFORCE = 9.81;
-        private static Double NU = 0.4; //only for M < 1
+        public const Double MAXCONVERT = 340.3f;
+        private const Double GFORCE = 9.81;
+        private const Double NU = 0.4; //only for M < 1
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(String propertyName)
@@ -69,6 +62,52 @@ namespace mainWindow
             newData.Q = _q;
             return newData;
         }
+
+
+       
+                               
+                    
+
+        public ModelData CopyDataForMassCalc(ModelData newData)
+        {
+            newData.Cy = _c_y;
+            newData.Ps = _p_s;
+            newData.Ba = _b_a;
+            newData.MaxNumber = _max_number;
+            newData.Square = _square;
+            newData.NMax = _n_max;
+            newData.Time = _time;
+            newData.TimeOne = _time1;
+            newData.TimeTwo = _time2;
+            newData.L = _l;
+            newData.Velocity = _velocity;
+            newData.Height = _height;
+            newData.BOne = _bOne;
+            newData.BTwo = _bTwo;
+            
+            return newData;
+        }
+
+        public ModelData CopyDataForSpeedCalc(ModelData newData)
+        {
+            newData.Mass = _mass;
+            newData.Cy = _c_y;
+            newData.Ps = _p_s;
+            newData.Ba = _b_a;
+            newData.Square = _square;
+            newData.NMax = _n_max;
+            newData.Time = _time;
+            newData.TimeOne = _time1;
+            newData.TimeTwo = _time2;
+            newData.L = _l;
+            newData.Height = _height;
+            newData.BOne = _bOne;
+            newData.BTwo = _bTwo;
+            newData.KDash = _kdash;
+            return newData;
+        }
+
+
 
         #endregion
 
@@ -163,14 +202,6 @@ namespace mainWindow
         public double P { get { return _p; } set { _p = value; OnPropertyChanged("P"); } }
         public double Q { get { return _q; } set { _q = value; OnPropertyChanged("Q"); } }
 
-
-
-
-
-
-
-
-
         #endregion
 
         #region Mathematical Calculations
@@ -240,7 +271,7 @@ namespace mainWindow
         }
         #endregion
 
-        //Возвращает список с для графика скорости
+       
         public List<DataPoint> GetDepenedncyPointsPv(String propX, String propY, Double upperBorder)
         {
             List<DataPoint> list = new List<DataPoint>();

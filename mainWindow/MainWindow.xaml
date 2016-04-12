@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterScreen"
         Icon="Images/plane.ico"
         Title="Влияние турбулентности на воздушное судно" Height="766" Width="1376">
-        
+
     <Window.DataContext>
         <dc:ViewModel></dc:ViewModel>
     </Window.DataContext>
@@ -35,7 +35,7 @@
                             <dc:LabelTextBox x:Name="LtbSquare"  Label="Площадь крыла, м^2" Text="{Binding Data.Square, StringFormat={}0.####}"   Width="Auto"/>
                             <dc:LabelTextBox x:Name="LtbM"  Label="Число Маха" Text="{Binding Data.MaxNumber, StringFormat={}0.####}"  Width="Auto"/>
                             <dc:LabelTextBox x:Name="LtbBa" Label="Средняя аэродинамическая хорда, м" Text="{Binding Data.Ba, StringFormat={}0.####}"   Width="Auto"/>
-                            <dc:LabelTextBox x:Name="LtbNMax"  Label="Максимальное приращанеие перегрузки" Text="{Binding Data.NMax, StringFormat={}0.####}"   Width="Auto"/>
+                            <dc:LabelTextBox x:Name="LtbNMax"  Label="Vаксимальное приращение перегрузки" Text="{Binding Data.NMax, StringFormat={}0.####}"   Width="Auto"/>
                             <dc:LabelTextBox x:Name="LtbTime"  Label="Время, за которое определяется уровень риска, час." Text="{Binding Data.Time, StringFormat={}0.####}"   Width="Auto"/>
                             <dc:LabelTextBox x:Name="LtbL"  Label="Масштаб турбулентности, м"  Text="{Binding Data.L, StringFormat={}0.####}"   Width="Auto"/>
                             <dc:LabelTextBox x:Name="LtbHeight"  Label="Высота полета, м" Text="{Binding Data.Height, StringFormat={}0.####}" Width="Auto" />
@@ -57,8 +57,8 @@
                                 <dc:LabelTextBox x:Name="LtbKDash" Label="K'" Text="{Binding Data.KDash, StringFormat={}0.####}" Grid.Column="0" />
                                 <Label Grid.Column="1"  Content="(Находится по графику)" HorizontalAlignment="Left"></Label>
                             </Grid>
-                            
-                            
+
+
                             <Label x:Name="Step3Label" Content="Расчет K" Margin="0,0,0.2,0" />
                             <dc:LabelTextBox x:Name="LtbYAlpha" Label="Y alpha" Text="{Binding Data.YAlpha, StringFormat={}0.####}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
                             <dc:LabelTextBox x:Name="LtbBetha" Label="β"  Text="{Binding Data.Betha, StringFormat={}0.####}"  ReadOnly="True" TextBoxBackGround="BlanchedAlmond"/>
@@ -67,7 +67,7 @@
                             <dc:LabelTextBox x:Name="LtbK" Label="K" Text="{Binding Data.K, StringFormat={}0.####}"  ReadOnly="True" TextBoxBackGround="BlanchedAlmond"  />
                             <Label x:Name="Step4Label" Content="Расчет B" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                             <Button x:Name="CalcB" Content="Рассчитать B"  Command="{Binding CalcB}" />
-                            <dc:LabelTextBox x:Name="LtbB" Label="B" Text="{Binding Data.B, StringFormat={}0.#### }"   VerticalAlignment="Top" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"/>                          
+                            <dc:LabelTextBox x:Name="LtbB" Label="B" Text="{Binding Data.B, StringFormat={}0.#### }"   VerticalAlignment="Top" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"/>
                         </StackPanel>
                     </Border>
 
@@ -79,16 +79,17 @@
                             <Button x:Name="CalcLambdaZero" Content="Рассчитать &#955;"   Command="{Binding CalcLambdaZero}"/>
                             <dc:LabelTextBox Label="b__1" Text="{Binding Data.BOne, StringFormat={}0.####}" />
                             <dc:LabelTextBox Label="b__2" Text="{Binding Data.BTwo, StringFormat={}0.####}" />
-                            <Button x:Name="CalcLambdas" Command="{Binding CalcLambdas}" Content="Рассчиать λ__01 и λ__02"  />
-                            <dc:LabelTextBox Label="&#955;__01" Text="{Binding Data.LambdaOne, StringFormat={}0.##########}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" /> <!-- 10 digit precision-->
+                            <Button x:Name="CalcLambdas" Command="{Binding CalcLambdas}" Content="Рассчитать λ__01 и λ__02"  />
+                            <dc:LabelTextBox Label="&#955;__01" Text="{Binding Data.LambdaOne, StringFormat={}0.##########}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
+                            <!-- 10 digit precision-->
                             <dc:LabelTextBox Label="&#955;__02" Text="{Binding Data.LambdaTwo, StringFormat={}0.##########}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond"/>
                             <dc:LabelTextBox Label="t_1" Text="{Binding Data.TimeOne, StringFormat={}0.######}" />
                             <dc:LabelTextBox Label="t_2" Text="{Binding Data.TimeTwo, StringFormat={}0.######}" />
                             <Button x:Name="CalcPQ" Content="Рассчитать P и Q"  Command="{Binding CalcPQ}" />
                             <dc:LabelTextBox Label="Уровень безопастности полетов P " Text="{Binding Data.P, StringFormat={}0.####}" Margin="0,0,-0.2,0" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
                             <dc:LabelTextBox Label="Уровень риска Q" Text="{Binding Data.Q, StringFormat={}0.####}"   ReadOnly="True" TextBoxBackGround="BlanchedAlmond" />
-                            
-                            
+
+
                         </StackPanel>
                     </Border>
 
@@ -123,25 +124,133 @@
                                     <DataGridTextColumn Header="P" IsReadOnly="True" Binding="{Binding Path=P, StringFormat={}0.####}"></DataGridTextColumn>
                                     <DataGridTextColumn Header="Q" IsReadOnly="True" Binding="{Binding Path=Q, StringFormat={}0.####}"></DataGridTextColumn>
                                 </DataGrid.Columns>
-                                
+
                             </DataGrid>
                         </Grid>
-                        
+
                     </Border>
-                    
+
 
 
 
                 </Grid>
             </TabItem>
-            
+
+            <TabItem Header="Исходные данные для графиков">
+                <Grid>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="400"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*" MinWidth="300"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Grid.ColumnSpan="6">
+                            <Label Content="Вычисление точек для графика зависимости от массы"  FontSize="20" FontWeight="DemiBold"></Label>
+                        </Border>
+                        <Border Grid.Column="0" Grid.Row="1">
+                            <StackPanel>
+                                <!-- dont change this fields -->
+                                <dc:LabelTextBox x:Name="Ltb2Cy"  Label="Коэффицент поъемной силы" Text="{Binding Data.Cy, StringFormat={}0.####}"   Width="Auto" />
+                                <dc:LabelTextBox x:Name="Ltb2Ps"  Label="Плотность воздуха, кг/м^3" Text="{Binding Data.Ps, StringFormat={}0.####}"   Width="Auto"/>
+                                <dc:LabelTextBox x:Name="Ltb2Square"  Label="Площадь крыла, м^2" Text="{Binding Data.Square, StringFormat={}0.####}"   Width="Auto"/>
+                                <dc:LabelTextBox x:Name="Ltb2Ba" Label="Средняя аэродинамическая хорда, м" Text="{Binding Data.Ba, StringFormat={}0.####}"   Width="Auto"/>
+                                <dc:LabelTextBox x:Name="Ltb2NMax"  Label="Максимальное приращанеие перегрузки" Text="{Binding Data.NMax, StringFormat={}0.####}"   Width="Auto"/>
+                                <dc:LabelTextBox x:Name="Ltb2Time"  Label="Время, за которое определяется уровень риска, час." Text="{Binding Data.Time, StringFormat={}0.####}"   Width="Auto"/>
+                                <dc:LabelTextBox x:Name="Ltb2L"  Label="Масштаб турбулентности, м"  Text="{Binding Data.L, StringFormat={}0.####}"   Width="Auto"/>
+                                <dc:LabelTextBox x:Name="Ltb2Height"  Label="Высота полета, м" Text="{Binding Data.Height, StringFormat={}0.####}" Width="Auto" />
+                                <dc:LabelTextBox Label="b__1 " Text="{Binding Data.BOne, StringFormat={}0.####}" />
+                                <dc:LabelTextBox Label="b__2" Text="{Binding Data.BTwo, StringFormat={}0.####}" />
+                                <dc:LabelTextBox Label="t_1" Text="{Binding Data.TimeOne, StringFormat={}0.######}" />
+                                <dc:LabelTextBox Label="t_2" Text="{Binding Data.TimeTwo, StringFormat={}0.######}" />
+
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="1" Grid.Row="1"  >
+                            <StackPanel>
+                                <dc:LabelTextBox x:Name="mass1" Label="Масса, кг" Text="{Binding PointsDummyMass.ModelData1.Mass, StringFormat={}0.####}" Width="150"  />
+                                <dc:LabelTextBox x:Name="mass2" Label="Масса, кг" Text="{Binding PointsDummyMass.ModelData2.Mass, StringFormat={}0.####}" Width="150"    />
+                                <dc:LabelTextBox x:Name="mass3" Label="Масса, кг" Text="{Binding PointsDummyMass.ModelData3.Mass, StringFormat={}0.####}" Width="150"    />
+                                <dc:LabelTextBox x:Name="mass4" Label="Масса, кг" Text="{Binding PointsDummyMass.ModelData4.Mass, StringFormat={}0.####}" Width="150"  />
+                                <dc:LabelTextBox x:Name="mass5" Label="Масса, кг" Text="{Binding PointsDummyMass.ModelData5.Mass, StringFormat={}0.####}" Width="150"    />
+                                <Button Height="30" Content="Рассчитать Nu and Xi" Command="{Binding Put5Mass}"></Button>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="2"  Grid.Row="1" >
+                            <StackPanel>
+                                <dc:LabelTextBox x:Name="LtbMu1" Label="&#956;" Text="{Binding PointsDummyMass.ModelData1.Mu, StringFormat={}0.####}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" Width="100" />
+                                <dc:LabelTextBox x:Name="LtbMu2" Label="&#956;" Text="{Binding PointsDummyMass.ModelData2.Mu, StringFormat={}0.####}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" Width="100"  />
+                                <dc:LabelTextBox x:Name="LtbMu3" Label="&#956;" Text="{Binding PointsDummyMass.ModelData3.Mu, StringFormat={}0.####}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" Width="100"  />
+                                <dc:LabelTextBox x:Name="LtbMu4" Label="&#956;" Text="{Binding PointsDummyMass.ModelData4.Mu, StringFormat={}0.####}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" Width="100"  />
+                                <dc:LabelTextBox x:Name="LtbMu5" Label="&#956;" Text="{Binding PointsDummyMass.ModelData5.Mu, StringFormat={}0.####}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" Width="100"  />
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="3"  Grid.Row="1" >
+                            <StackPanel>
+                                <dc:LabelTextBox x:Name="LtbXi1" Label="&#967;" Text="{Binding PointsDummyMass.ModelData1.Xi, StringFormat={}0.####}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" Width="100" />
+                                <dc:LabelTextBox x:Name="LtbXi2" Label="&#967;" Text="{Binding PointsDummyMass.ModelData2.Xi, StringFormat={}0.####}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" Width="100" />
+                                <dc:LabelTextBox x:Name="LtbXi3" Label="&#967;" Text="{Binding PointsDummyMass.ModelData3.Xi, StringFormat={}0.####}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" Width="100" />
+                                <dc:LabelTextBox x:Name="LtbXi4" Label="&#967;" Text="{Binding PointsDummyMass.ModelData4.Xi, StringFormat={}0.####}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" Width="100" />
+                                <dc:LabelTextBox x:Name="LtbXi5" Label="&#967;" Text="{Binding PointsDummyMass.ModelData5.Xi, StringFormat={}0.####}" ReadOnly="True" TextBoxBackGround="BlanchedAlmond" Width="100" />
+
+                            </StackPanel>
+                        </Border>
+
+                        <Border Grid.Column="4" Grid.Row="1" >
+                            <Image Source="Images/K.png"  Stretch="Uniform"  VerticalAlignment="Top"   ></Image>
+                        </Border>
+
+                        <Border Grid.Column="5"  Grid.Row="1">
+                            <StackPanel>
+                                <dc:LabelTextBox x:Name="LtbKDash1" Label="K'" Text="{Binding PointsDummyMass.ModelData1.KDash, StringFormat={}0.####}" Width="100"  />
+                                <dc:LabelTextBox x:Name="LtbKDash2" Label="K'" Text="{Binding PointsDummyMass.ModelData2.KDash, StringFormat={}0.####}" Width="100"  />
+                                <dc:LabelTextBox x:Name="LtbKDash3" Label="K'" Text="{Binding PointsDummyMass.ModelData3.KDash, StringFormat={}0.####}" Width="100"  />
+                                <dc:LabelTextBox x:Name="LtbKDash4" Label="K'" Text="{Binding PointsDummyMass.ModelData4.KDash, StringFormat={}0.####}" Width="100"  />
+                                <dc:LabelTextBox x:Name="LtbKDash5" Label="K'" Text="{Binding PointsDummyMass.ModelData5.KDash, StringFormat={}0.####}" Width="100"  />
+                                <Button Height="30" Content="Рассчитать точки" Command="{Binding Put5Kdash}"></Button>
+                            </StackPanel>
+                        </Border>
+                        
+                        <Border Grid.Row="2" Grid.ColumnSpan="6">
+                            <Label Content="Вычисление точек для графика зависимости от скорости" FontSize="20" FontWeight="DemiBold"></Label>
+                        </Border>
+                        <Border Grid.Column="0" Grid.Row="3">
+                            <StackPanel>
+                                <dc:LabelTextBox x:Name="LtbM1"  Label="Число Маха" Text="{Binding PointsDummySpeed.ModelData1.MaxNumber, StringFormat={}0.####}"  Width="Auto"/>
+                                <dc:LabelTextBox x:Name="LtbM2"  Label="Число Маха" Text="{Binding PointsDummySpeed.ModelData2.MaxNumber, StringFormat={}0.####}"  Width="Auto"/>
+                                <dc:LabelTextBox x:Name="LtbM3"  Label="Число Маха" Text="{Binding PointsDummySpeed.ModelData3.MaxNumber, StringFormat={}0.####}"  Width="Auto"/>
+                                <dc:LabelTextBox x:Name="LtbM4"  Label="Число Маха" Text="{Binding PointsDummySpeed.ModelData4.MaxNumber, StringFormat={}0.####}"  Width="Auto"/>
+                                <dc:LabelTextBox x:Name="LtbM5"  Label="Число Маха" Text="{Binding PointsDummySpeed.ModelData5.MaxNumber, StringFormat={}0.####}"  Width="Auto"/>
+                                <Button Height="30" Content="Рассчитать точки" Command="{Binding Put5Speed}"></Button>
+                            </StackPanel>
+                        </Border>
+
+
+
+                    </Grid>
+
+
+                </Grid>
+            </TabItem>
+
             <TabItem Header="Коэффициент К'">
                 <Grid>
                     <StackPanel >
                         <Label HorizontalAlignment="Center">Коэффициент К’</Label>
                         <Image Source="Images/K.png"  Stretch="Fill"  VerticalAlignment="Top" HorizontalAlignment="Left" MaxWidth="800" ></Image>
                     </StackPanel>
-                </Grid>                
+                </Grid>
             </TabItem>
             <TabItem Header="Модель атмосферной турбулентности">
                 <StackPanel>
@@ -182,7 +291,7 @@
             </TabItem>
             <TabItem x:Name="Task" Header="Задание">
                 <DocumentViewer x:Name="TaskDocumentViewer">
-                    
+
                 </DocumentViewer>
             </TabItem>
             <TabItem Header="Теория">

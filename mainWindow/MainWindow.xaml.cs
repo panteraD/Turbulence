@@ -25,10 +25,6 @@ namespace mainWindow
             //bind dataGrids
             viewModel.DataGridMass = dataGridMass;
             viewModel.DataGridSpeed = dataGridSpeed;
-   
-           
-   
-
             
             string taskDocName = "Task.xps";
             string theoryDocName = "Theory.xps";

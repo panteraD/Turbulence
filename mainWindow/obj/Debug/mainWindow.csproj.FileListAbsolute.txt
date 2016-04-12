@@ -86,19 +86,15 @@ C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\bin\Debug\mainWindow.exe.
 C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\bin\Debug\mainWindow.application
 C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\bin\Debug\mainWindow.exe
 C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\bin\Debug\mainWindow.pdb
-C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\bin\Debug\AxInterop.AcroPDFLib.dll
 C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\bin\Debug\GalaSoft.MvvmLight.Platform.dll
-C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\bin\Debug\log4net.dll
 C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\bin\Debug\MouseKeyboardActivityMonitor.dll
 C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\bin\Debug\OxyPlot.dll
 C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\bin\Debug\OxyPlot.Wpf.dll
 C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\bin\Debug\OxyPlot.Xps.dll
 C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\bin\Debug\System.Windows.Interactivity.dll
-C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\bin\Debug\WPFPdfViewer.dll
 C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\bin\Debug\GalaSoft.MvvmLight.dll
 C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
 C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\bin\Debug\GalaSoft.MvvmLight.Platform.xml
-C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\bin\Debug\log4net.xml
 C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\bin\Debug\OxyPlot.pdb
 C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\bin\Debug\OxyPlot.xml
 C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\bin\Debug\OxyPlot.Wpf.pdb
@@ -121,4 +117,3 @@ C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\obj\Debug\mainWindow.cspr
 C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\obj\Debug\mainWindow.TrustInfo.xml
 C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\obj\Debug\mainWindow.exe.manifest
 C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\obj\Debug\mainWindow.application
-C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\obj\Debug\mainWindow.csprojResolveAssemblyReference.cache

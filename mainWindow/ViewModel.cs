@@ -91,7 +91,7 @@ namespace mainWindow
         public ViewModel()
         {
             _data = new ModelData();
-           // InitData(_data);
+            InitData(_data);
             _plotModel = new PlotModel();
             _pointsDummyMass = new PointsDummy();
             _pointsDummySpeed = new PointsDummy();

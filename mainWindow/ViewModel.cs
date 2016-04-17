@@ -91,7 +91,7 @@ namespace mainWindow
         public ViewModel()
         {
             _data = new ModelData();
-            InitData(_data);
+           // InitData(_data);
             _plotModel = new PlotModel();
             _pointsDummyMass = new PointsDummy();
             _pointsDummySpeed = new PointsDummy();
@@ -299,13 +299,33 @@ namespace mainWindow
             SetUpAxes(xAxis, yAxis);
         }
 
-        private void SetUpAxes(String xAxis, String yAxis)
+        private void SetUpAxes(String xAxisTitle, String yAxisTitle)
         {
 
             PlotModel.Axes.Clear();
+            var xAxis = new OxyPlot.Axes.LinearAxis()
+            {
+                Position = AxisPosition.Left,
+                Title = xAxisTitle,
+                TitlePosition = 1
+
+            };
+
+            var yAxis = new OxyPlot.Axes.LinearAxis()
+            {
+                Position = AxisPosition.Bottom,
+                Title = yAxisTitle,
+                TitlePosition = 1
+              
+            };
+
+    
+            
+           PlotModel.Axes.Add(xAxis);
+           PlotModel.Axes.Add(yAxis); 
            
-            PlotModel.Axes.Add(new LinearAxis(AxisPosition.Left, "X") { Title = xAxis });
-            PlotModel.Axes.Add(new LinearAxis(AxisPosition.Bottom, "Y") { Title = yAxis });
+            //PlotModel.Axes.Add(new LinearAxis(AxisPosition.Left, "X") { Title = xAxisTitle });
+            //PlotModel.Axes.Add(new LinearAxis(AxisPosition.Bottom, "Y") { Title = yAxisTitle });
 
             PlotModel.PlotMargins = new OxyThickness(40, 40, 40, 40);
         }

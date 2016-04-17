@@ -16,7 +16,9 @@ namespace mainWindow
     class ViewModel : INotifyPropertyChanged
     {
         private DataGrid dataGridMass;
+        private DataGrid dataGridMass2;
         private DataGrid dataGridSpeed;
+        private DataGrid dataGridSpeed2;
         #region binding stuff
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(String propertyName)
@@ -91,7 +93,8 @@ namespace mainWindow
         public ViewModel()
         {
             _data = new ModelData();
-           // InitData(_data);
+            //TESTING
+            // InitData(_data);
             _plotModel = new PlotModel();
             _pointsDummyMass = new PointsDummy();
             _pointsDummySpeed = new PointsDummy();
@@ -111,7 +114,19 @@ namespace mainWindow
         }
 
 
-      
+        public DataGrid DataGridMass2
+        {
+            get { return dataGridMass2; }
+            set { dataGridMass2 = value; }
+        }
+
+        public DataGrid DataGridSpeed2
+        {
+            get { return dataGridSpeed2; }
+            set { dataGridSpeed2 = value; }
+        }
+
+
         private void InitData(ModelData data)
         {
             data.Height = 10000;
@@ -141,6 +156,8 @@ namespace mainWindow
             _dataMassPointsList.Add(_data.Clone());
             dataGridMass.ItemsSource = null;
             dataGridMass.ItemsSource = DataMassPointsList;
+            dataGridMass2.ItemsSource = null;
+            dataGridMass2.ItemsSource = DataMassPointsList;
         }
 
         private void AddDataPointForSpeedList()
@@ -152,6 +169,8 @@ namespace mainWindow
             _dataSpeedPointsList.Add(_data.Clone());
             dataGridSpeed.ItemsSource = null;
             dataGridSpeed.ItemsSource = DataSpeedPointsList;
+            dataGridSpeed2.ItemsSource = null;
+            dataGridSpeed2.ItemsSource = DataSpeedPointsList;
         }
 
 
@@ -258,6 +277,8 @@ namespace mainWindow
 
             dataGridMass.ItemsSource = null;
             dataGridMass.ItemsSource = DataMassPointsList;
+            dataGridMass2.ItemsSource = null;
+            dataGridMass2.ItemsSource = DataMassPointsList;
         }
 
         public void Calc5Speed()
@@ -281,8 +302,11 @@ namespace mainWindow
             DataSpeedPointsList.Add(PointsDummySpeed.ModelData3);
             DataSpeedPointsList.Add(PointsDummySpeed.ModelData4);
             DataSpeedPointsList.Add(PointsDummySpeed.ModelData5);
+            
             dataGridSpeed.ItemsSource = null;
             dataGridSpeed.ItemsSource = DataSpeedPointsList;
+            dataGridSpeed2.ItemsSource = null;
+            dataGridSpeed2.ItemsSource = DataSpeedPointsList;
         }
 
         #endregion

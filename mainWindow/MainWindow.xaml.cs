@@ -24,7 +24,9 @@ namespace mainWindow
             DataContext = viewModel;
             //bind dataGrids
             viewModel.DataGridMass = dataGridMass;
+            viewModel.DataGridMass2 = dataGridMass2;
             viewModel.DataGridSpeed = dataGridSpeed;
+            viewModel.DataGridSpeed2 = dataGridSpeed2;
             
             string taskDocName = "Task.xps";
             string theoryDocName = "Theory.xps";

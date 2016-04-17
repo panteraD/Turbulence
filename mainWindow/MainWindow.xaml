@@ -236,6 +236,43 @@
                             </StackPanel>
                         </Border>
 
+                        <Border Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="3" BorderThickness="3" BorderBrush="BlanchedAlmond">
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Label Content="Точки для посторения к графиков P и Q, зависящих от массы"  Grid.Column="0" Grid.Row="0"></Label>
+                                <DataGrid x:Name="dataGridMass2"  AutoGenerateColumns="False" ColumnHeaderHeight="30" ColumnWidth="*" MinColumnWidth="20" SelectionMode="Single" SelectionUnit="FullRow"  Grid.Column="0" Grid.Row="1">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Масса" IsReadOnly="True" Binding="{Binding Path=Mass, StringFormat={}0.####}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="&#956;" IsReadOnly="True" Binding="{Binding Path=Mu, StringFormat={}0.####}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="&#967;" IsReadOnly="True" Binding="{Binding Path=Xi, StringFormat={}0.####}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="K`" IsReadOnly="True" Binding="{Binding Path=KDash, StringFormat={}0.####}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="P" IsReadOnly="True" Binding="{Binding Path=P, StringFormat={}0.####}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Q" IsReadOnly="True" Binding="{Binding Path=Q, StringFormat={}0.####}"></DataGridTextColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Label Content="Точки для построения графиков P и Q, зависящих от скорости" Grid.Column="1" Grid.Row="0"></Label>
+                                <DataGrid x:Name="dataGridSpeed2" AutoGenerateColumns="False" ColumnHeaderHeight="30" ColumnWidth="*" MinColumnWidth="20" SelectionMode="Single" SelectionUnit="FullRow" Grid.Column="1" Grid.Row="1" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Число Маха" IsReadOnly="True" Binding="{Binding Path=MaxNumber, StringFormat={}0.####}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="P" IsReadOnly="True" Binding="{Binding Path=P, StringFormat={}0.####}"></DataGridTextColumn>
+                                        <DataGridTextColumn Header="Q" IsReadOnly="True" Binding="{Binding Path=Q, StringFormat={}0.####}"></DataGridTextColumn>
+                                    </DataGrid.Columns>
+
+                                </DataGrid>
+                            </Grid>
+
+                        </Border>
+
+
+
+
 
 
                     </Grid>

@@ -10,11 +10,13 @@ using GalaSoft.MvvmLight.CommandWpf;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
+using SelectionMode = OxyPlot.SelectionMode;
 
 namespace mainWindow
 {
     class ViewModel : INotifyPropertyChanged
     {
+
         private DataGrid dataGridMass;
         private DataGrid dataGridMass2;
         private DataGrid dataGridSpeed;
@@ -37,6 +39,7 @@ namespace mainWindow
         private PointsDummy _pointsDummySpeed;
         private List<ModelData> _dataMassPointsList = new List<ModelData>();
         private List<ModelData> _dataSpeedPointsList = new List<ModelData>();
+        private PlotController _customPlotController;
 
         public enum SortByWhat
         {
@@ -88,16 +91,31 @@ namespace mainWindow
             set { _pointsDummySpeed = value; OnPropertyChanged("PointsDummySpeed"); }
         }
 
+        public PlotController CustomPlotController
+        {
+            get { return _customPlotController; }
+            set { _customPlotController = value; OnPropertyChanged("CustomPlotController"); }
+        }
+
         #endregion
 
         public ViewModel()
         {
             _data = new ModelData();
-            //TESTING
-            // InitData(_data);
+            //Shole point legend when hovering
+            _customPlotController = new PlotController();
+            _customPlotController.UnbindMouseDown(OxyMouseButton.Left);
+            _customPlotController.BindMouseEnter(PlotCommands.HoverSnapTrack);
             _plotModel = new PlotModel();
             _pointsDummyMass = new PointsDummy();
             _pointsDummySpeed = new PointsDummy();
+            //TESTING
+            InitData(_data);
+            PointsDummySpeed.ModelData1.MaxNumber = 0.5;
+            PointsDummySpeed.ModelData2.MaxNumber = 0.6;
+            PointsDummySpeed.ModelData3.MaxNumber = 0.7;
+            PointsDummySpeed.ModelData4.MaxNumber = 0.8;
+            PointsDummySpeed.ModelData5.MaxNumber = 0.9;
 
         }
 
@@ -189,30 +207,32 @@ namespace mainWindow
 
         private void ShowPMass()
         {
-            UpdatePlot("Mass", "P", "P", "m, кг", "зависимость P от массы", false, this._dataMassPointsList, SortByWhat.Mass);
+            UpdatePlot("Mass", "P", "m, кг", "P", "зависимость P от массы", this._dataMassPointsList, SortByWhat.Mass);
         }
 
         public void ShowQMass()
         {
 
-            UpdatePlot("Mass", "Q", "Q", "m, кг", "зависимость Q от массы", false, this._dataMassPointsList, SortByWhat.Mass);
+            UpdatePlot("Mass", "Q", "m, кг", "Q", "зависимость Q от массы", this._dataMassPointsList, SortByWhat.Mass);
 
         }
 
         public void ShowPV()
         {
-            UpdatePlot("Velocity", "P", "P", "V, м/с", "зависимость P от скорости", false, this._dataSpeedPointsList, SortByWhat.Speed);
+            //UpdatePlot("Velocity", "P", "V, м/с", "P", "зависимость P от скорости", false, this._dataSpeedPointsList, SortByWhat.Speed);
+            UpdatePlot("MaxNumber", "P", "M, число маха", "P", "зависимость P от скорости", this._dataSpeedPointsList, SortByWhat.Speed);
         }
 
         public void ShowQV()
         {
-            UpdatePlot("Velocity", "Q", "Q", "V, м/с", "зависимость Q от скорости", false, this._dataSpeedPointsList, SortByWhat.Speed);
+            //UpdatePlot("Velocity", "Q", "V, м/с", "Q", "зависимость Q от скорости", false, this._dataSpeedPointsList, SortByWhat.Speed);
+            UpdatePlot("MaxNumber", "Q", "М, число маха", "Q", "зависимость Q от скорости", this._dataSpeedPointsList, SortByWhat.Speed);
         }
 
 
 
-#region fast points calc
-        //sorry for that =)
+        #region fast points calc
+        //retarded piece of code
         public void Calc5Mass()
         {
             //copy some data
@@ -302,7 +322,7 @@ namespace mainWindow
             DataSpeedPointsList.Add(PointsDummySpeed.ModelData3);
             DataSpeedPointsList.Add(PointsDummySpeed.ModelData4);
             DataSpeedPointsList.Add(PointsDummySpeed.ModelData5);
-            
+
             dataGridSpeed.ItemsSource = null;
             dataGridSpeed.ItemsSource = DataSpeedPointsList;
             dataGridSpeed2.ItemsSource = null;
@@ -316,46 +336,59 @@ namespace mainWindow
 
         #region Plottting methods
 
-        private void UpdatePlot(String xProp, String yProp, String xAxis, String yAxis, String legend, bool dataIndepended, List<ModelData> dataPointsList, SortByWhat sortByWhat)
+
+
+        /// <summary>
+        /// Draws plot with given params
+        /// </summary>
+        /// <param name="xProp">x Property name in ModelData class</param>
+        /// <param name="yProp">y Property name in ModelData class</param>
+        /// <param name="xAxisTitle">x axis title</param>
+        /// <param name="yAxisTitle">y axis title</param>
+        /// <param name="legend">legend</param>
+        /// <param name="dataIndepended">deprected</param>
+        /// <param name="dataPointsList">reference to List containing modelData points</param>
+        /// <param name="sortByWhat">sort by SortByWhat enum</param>
+        private void UpdatePlot(String xProp, String yProp, String xAxisTitle, String yAxisTitle, String legend, List<ModelData> dataPointsList, SortByWhat sortByWhat)
         {
 
-            LoadData(xProp, yProp, legend, dataIndepended, dataPointsList, sortByWhat);
-            SetUpAxes(xAxis, yAxis);
+            LoadData(xProp, yProp, legend, dataPointsList, sortByWhat);
+            SetUpAxes(xAxisTitle, yAxisTitle);
         }
 
         private void SetUpAxes(String xAxisTitle, String yAxisTitle)
         {
-
             PlotModel.Axes.Clear();
-            var xAxis = new OxyPlot.Axes.LinearAxis()
-            {
-                Position = AxisPosition.Left,
-                Title = xAxisTitle,
-                TitlePosition = 1
-
-            };
-
             var yAxis = new OxyPlot.Axes.LinearAxis()
             {
-                Position = AxisPosition.Bottom,
+                Position = AxisPosition.Left,
                 Title = yAxisTitle,
-                TitlePosition = 1
-              
+                TitlePosition = 1,
+                TitleFontSize = 20,
+
             };
 
-    
-            
-           PlotModel.Axes.Add(xAxis);
-           PlotModel.Axes.Add(yAxis); 
-           
+            var xAxis = new OxyPlot.Axes.LinearAxis()
+            {
+                Position = AxisPosition.Bottom,
+                Title = xAxisTitle,
+                TitlePosition = 1,
+                TitleFontSize = 20
+            };
+
+
+
+            PlotModel.Axes.Add(xAxis);
+            PlotModel.Axes.Add(yAxis);
+
             //PlotModel.Axes.Add(new LinearAxis(AxisPosition.Left, "X") { Title = xAxisTitle });
             //PlotModel.Axes.Add(new LinearAxis(AxisPosition.Bottom, "Y") { Title = yAxisTitle });
 
             PlotModel.PlotMargins = new OxyThickness(40, 40, 40, 40);
         }
 
-       
-        public void LoadData(String param1, String param2, String legend, bool dataIndependent, List<ModelData> dataPointsList, SortByWhat sortByWhat)
+
+        public void LoadData(String param1, String param2, String legend, List<ModelData> dataPointsList, SortByWhat sortByWhat)
         {
             if (PlotModel != null)
             {
@@ -369,35 +402,35 @@ namespace mainWindow
             {
                 StrokeThickness = 2,
                 MarkerSize = 3,
-                CanTrackerInterpolatePoints = false,
+                //default if false
+                CanTrackerInterpolatePoints = true,
                 Title = legend,
-                Smooth = false,
-            };
-            //если точки можно рассчиать без пользовательских данных
-            if (dataIndependent)
-            {
-                //lineSerie.Points.AddRange(_data.GetDepenedncyPointsPv(param1, param2, upperBorder));
-            }
-            else
-            {
-                if (dataPointsList != null && dataPointsList.Count < 2)
-                {
-                    MessageBox.Show("Количество добаленных точек меньше двух");
-                    new Tuple<double, double>(0, 0);
-                }
+                //default if false
+                Smooth = true,
 
-                if (sortByWhat.Equals(SortByWhat.Mass))
-                {
-                    //сортировка  точек в листе по массе
-                    dataPointsList.Sort(delegate (ModelData c1, ModelData c2) { return c1.Mass.CompareTo(c2.Mass); });
-                }
-                else if (sortByWhat.Equals(SortByWhat.Speed))
-                {
-                    dataPointsList.Sort(delegate (ModelData c1, ModelData c2) { return c1.Velocity.CompareTo(c2.Velocity); });
-                }
-            
-                lineSerie.Points.AddRange(this.GetXYPointsFromAll(param1, param2, dataPointsList));
+                MarkerType = MarkerType.Circle,
+            };
+
+
+
+            if (dataPointsList != null && dataPointsList.Count < 2)
+            {
+                MessageBox.Show("Количество добаленных точек меньше двух");
+                new Tuple<double, double>(0, 0);
             }
+
+            if (sortByWhat.Equals(SortByWhat.Mass))
+            {
+                //сортировка  точек в листе по массе
+                dataPointsList.Sort(delegate (ModelData c1, ModelData c2) { return c1.Mass.CompareTo(c2.Mass); });
+            }
+            else if (sortByWhat.Equals(SortByWhat.Speed))
+            {
+                dataPointsList.Sort(delegate (ModelData c1, ModelData c2) { return c1.Velocity.CompareTo(c2.Velocity); });
+            }
+
+            lineSerie.Points.AddRange(this.GetXYPointsFromAll(param1, param2, dataPointsList));
+
 
             PlotModel.Series.Add(lineSerie);
         }
@@ -419,7 +452,6 @@ namespace mainWindow
         private ICommand _showqv;
         private ICommand _showph;
         private ICommand _showqh;
-        //для построения графиков
         private ICommand _put5Mass;
         private ICommand _put5Kdash;
         private ICommand _put5Speed;

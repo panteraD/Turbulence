@@ -117,3 +117,4 @@ C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\obj\Debug\mainWindow.cspr
 C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\obj\Debug\mainWindow.TrustInfo.xml
 C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\obj\Debug\mainWindow.exe.manifest
 C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\obj\Debug\mainWindow.application
+C:\Users\Andrey\Documents\GitHub\Turbulence\mainWindow\obj\Debug\mainWindow.csprojResolveAssemblyReference.cache

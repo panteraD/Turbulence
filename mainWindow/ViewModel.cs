@@ -110,12 +110,12 @@ namespace mainWindow
             _pointsDummyMass = new PointsDummy();
             _pointsDummySpeed = new PointsDummy();
             //TESTING
-            InitData(_data);
-            PointsDummySpeed.ModelData1.MaxNumber = 0.5;
-            PointsDummySpeed.ModelData2.MaxNumber = 0.6;
-            PointsDummySpeed.ModelData3.MaxNumber = 0.7;
-            PointsDummySpeed.ModelData4.MaxNumber = 0.8;
-            PointsDummySpeed.ModelData5.MaxNumber = 0.9;
+            //InitData(_data);
+            //PointsDummySpeed.ModelData1.MaxNumber = 0.5;
+            //PointsDummySpeed.ModelData2.MaxNumber = 0.6;
+            //PointsDummySpeed.ModelData3.MaxNumber = 0.7;
+            //PointsDummySpeed.ModelData4.MaxNumber = 0.8;
+            //PointsDummySpeed.ModelData5.MaxNumber = 0.9;
 
         }
 
@@ -220,13 +220,13 @@ namespace mainWindow
         public void ShowPV()
         {
             //UpdatePlot("Velocity", "P", "V, м/с", "P", "зависимость P от скорости", false, this._dataSpeedPointsList, SortByWhat.Speed);
-            UpdatePlot("MaxNumber", "P", "M, число маха", "P", "зависимость P от скорости", this._dataSpeedPointsList, SortByWhat.Speed);
+            UpdatePlot("MaxNumber", "P", "M", "P", "зависимость P от скорости", this._dataSpeedPointsList, SortByWhat.Speed);
         }
 
         public void ShowQV()
         {
             //UpdatePlot("Velocity", "Q", "V, м/с", "Q", "зависимость Q от скорости", false, this._dataSpeedPointsList, SortByWhat.Speed);
-            UpdatePlot("MaxNumber", "Q", "М, число маха", "Q", "зависимость Q от скорости", this._dataSpeedPointsList, SortByWhat.Speed);
+            UpdatePlot("MaxNumber", "Q", "М", "Q", "зависимость Q от скорости", this._dataSpeedPointsList, SortByWhat.Speed);
         }
 
 
@@ -365,6 +365,7 @@ namespace mainWindow
                 Title = yAxisTitle,
                 TitlePosition = 1,
                 TitleFontSize = 20,
+                StringFormat = "0.####"
 
             };
 
@@ -373,7 +374,9 @@ namespace mainWindow
                 Position = AxisPosition.Bottom,
                 Title = xAxisTitle,
                 TitlePosition = 1,
-                TitleFontSize = 20
+                TitleFontSize = 20,
+                StringFormat = "0.####"
+
             };
 
 
@@ -416,7 +419,7 @@ namespace mainWindow
             if (dataPointsList != null && dataPointsList.Count < 2)
             {
                 MessageBox.Show("Количество добаленных точек меньше двух");
-                new Tuple<double, double>(0, 0);
+                return;
             }
 
             if (sortByWhat.Equals(SortByWhat.Mass))

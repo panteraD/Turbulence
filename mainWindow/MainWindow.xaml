@@ -29,7 +29,6 @@
 
                     <Border Name="BorderOne" Grid.Column="0" Grid.Row="0" BorderThickness="3" BorderBrush="BlanchedAlmond">
                         <StackPanel>
-                            <dc:LabelTextBox x:Name="LtbMass" Label="Масса, кг" Text="{Binding Data.Mass, StringFormat={}0.####}"    Width="Auto"/>
                             <dc:LabelTextBox x:Name="LtbCy"  Label="Коэффицент поъемной силы" Text="{Binding Data.Cy, StringFormat={}0.####}"   Width="Auto" />
                             <dc:LabelTextBox x:Name="LtbPs"  Label="Плотность воздуха, кг/м^3" Text="{Binding Data.Ps, StringFormat={}0.####}"   Width="Auto"/>
                             <dc:LabelTextBox x:Name="LtbSquare"  Label="Площадь крыла, м^2" Text="{Binding Data.Square, StringFormat={}0.####}"   Width="Auto"/>

@@ -3,15 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:mainWindow"
-             xmlns:dc="clr-namespace:mainWindow"
              mc:Ignorable="d" Height="Auto" >
-    <Grid x:Name="Root" >
+    <Grid x:Name="Root" HorizontalAlignment="Right">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" SharedSizeGroup="Labels"/>  <!--wtf?-->
-            <ColumnDefinition Width="Auto"/> <!-- auto or * -->
+            <ColumnDefinition Width="Auto" SharedSizeGroup="Labels"/>  
+            <ColumnDefinition Width="*"/> 
         </Grid.ColumnDefinitions>
-        <Label Grid.Column="0" Content="{Binding Label}"  HorizontalContentAlignment="Stretch"  HorizontalAlignment="Stretch"  Name="BaseLabel" VerticalAlignment="Stretch"  />
-        <TextBox Grid.Column="1" Text="{Binding Text}" IsReadOnly="{Binding ReadOnly}" Background="{Binding TextBoxBackGround}"  Width="Auto" Name="BaseTextBox"  PreviewTextInput="Double_PreviewTextInput" DataObject.Pasting="DoubleOnly_Pasting"  HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Left" Margin="0,0,-50,0" MaxWidth="100"  />
+        <Label Grid.Column="0" Content="{Binding Label}"    />
+        <TextBox Grid.Column="1" Text="{Binding Text}" Width="70" Margin="5,0,10,0" IsReadOnly="{Binding ReadOnly}" Background="{Binding TextBoxBackGround}"  Name="BaseTextBox"  PreviewTextInput="Double_PreviewTextInput" DataObject.Pasting="DoubleOnly_Pasting" GotFocus="SelectAllTextOnGotFocus" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Left"  />
     </Grid>
 </UserControl>

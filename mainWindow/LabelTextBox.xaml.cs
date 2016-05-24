@@ -107,5 +107,16 @@ namespace mainWindow
             }
         }
 
+       
+
+        private void SelectAllTextOnGotFocus(object sender, RoutedEventArgs e)
+        {
+            var textBox = e.OriginalSource as TextBox;
+            if (textBox != null)
+            {
+                Keyboard.Focus(textBox);
+                textBox.SelectAll();
+            }
+        }
     }
 }

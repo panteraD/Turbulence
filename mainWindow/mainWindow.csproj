@@ -120,6 +120,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Container.cs" />
     <Compile Include="PointsDummy.cs" />
     <Compile Include="ModelData.cs" />
     <Compile Include="LabelTextBox.xaml.cs">

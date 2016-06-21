@@ -110,12 +110,12 @@ namespace mainWindow
             _pointsDummyMass = new PointsDummy();
             _pointsDummySpeed = new PointsDummy();
             //TESTING
-            //InitData(_data);
-            //PointsDummySpeed.ModelData1.MaxNumber = 0.5;
-            //PointsDummySpeed.ModelData2.MaxNumber = 0.6;
-            //PointsDummySpeed.ModelData3.MaxNumber = 0.7;
-            //PointsDummySpeed.ModelData4.MaxNumber = 0.8;
-            //PointsDummySpeed.ModelData5.MaxNumber = 0.9;
+            InitData(_data);
+            PointsDummySpeed.ModelData1.MaxNumber = 0.5;
+            PointsDummySpeed.ModelData2.MaxNumber = 0.6;
+            PointsDummySpeed.ModelData3.MaxNumber = 0.7;
+            PointsDummySpeed.ModelData4.MaxNumber = 0.8;
+            PointsDummySpeed.ModelData5.MaxNumber = 0.9;
 
         }
 

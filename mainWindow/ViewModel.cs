@@ -102,7 +102,7 @@ namespace mainWindow
         public ViewModel()
         {
             _data = new ModelData();
-            //Shole point legend when hovering
+            //Show point legend when hovering
             _customPlotController = new PlotController();
             _customPlotController.UnbindMouseDown(OxyMouseButton.Left);
             _customPlotController.BindMouseEnter(PlotCommands.HoverSnapTrack);
@@ -116,6 +116,21 @@ namespace mainWindow
             PointsDummySpeed.ModelData3.MaxNumber = 0.7;
             PointsDummySpeed.ModelData4.MaxNumber = 0.8;
             PointsDummySpeed.ModelData5.MaxNumber = 0.9;
+
+            PointsDummyMass.ModelData1.Mass = 90000;
+            PointsDummyMass.ModelData2.Mass = 100000;
+            PointsDummyMass.ModelData3.Mass = 110000;
+            PointsDummyMass.ModelData4.Mass = 120000;
+            PointsDummyMass.ModelData5.Mass = 130000;
+
+            PointsDummyMass.ModelData1.KDash = 0.87;
+            PointsDummyMass.ModelData2.KDash = 0.872;
+            PointsDummyMass.ModelData3.KDash = 0.874;
+            PointsDummyMass.ModelData4.KDash = 0.876;
+            PointsDummyMass.ModelData5.KDash = 0.876;
+
+
+
 
         }
 
@@ -232,7 +247,6 @@ namespace mainWindow
 
 
         #region fast points calc
-        //retarded piece of code
         public void Calc5Mass()
         {
             //copy some data
@@ -384,9 +398,6 @@ namespace mainWindow
             PlotModel.Axes.Add(xAxis);
             PlotModel.Axes.Add(yAxis);
 
-            //PlotModel.Axes.Add(new LinearAxis(AxisPosition.Left, "X") { Title = xAxisTitle });
-            //PlotModel.Axes.Add(new LinearAxis(AxisPosition.Bottom, "Y") { Title = yAxisTitle });
-
             PlotModel.PlotMargins = new OxyThickness(40, 40, 40, 40);
         }
 
@@ -416,7 +427,7 @@ namespace mainWindow
 
 
 
-            if (dataPointsList != null && dataPointsList.Count < 2)
+            if (dataPointsList == null || dataPointsList.Count < 2)
             {
                 MessageBox.Show("Количество добаленных точек меньше двух");
                 return;
